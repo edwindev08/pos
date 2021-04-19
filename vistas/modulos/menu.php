@@ -25,49 +25,26 @@
 				</a>
 
 			</li>
+			
+			<li class="nav-header">
+				<a href="#">
 
-			<li>
+					<!-- <i class="fa fa-list-ul"></i> -->
 
-				<a href="categorias">
+						<span>GESTIÓN DE ALMACEN</span>
 
-					<i class="fa fa-th"></i>
-					<span>Categorías</span>
-
-				</a>
-
-			</li>
-
-			<li>
-
-				<a href="productos">
-
-					<i class="fa fa-product-hunt"></i>
-					<span>Productos</span>
+						</span>
 
 				</a>
 
+					
 			</li>
-			<li>
-
-				<a href="Proveedores">
-
-					<i class="fa fa-industry"></i>
-					<span>Proveedores</span>
-
-				</a>
-
-			</li>
-
-			<li>
-
-				<a href="clientes">
-
-					<i class="fa fa-users"></i>
-					<span>Clientes</span>
-
-				</a>
-
-			</li>
+			<li><a href="categorias"><i class="fa fa-th"></i><span>Categorías</span></a></li>
+			<li><a href="productos"><i class="fa fa-product-hunt"></i><span>Productos</span></a></li>
+			<li><a href="proveedores"><i class="fa fa-truck"></i><span>Proveedores</span></a></li>
+			<li><a href="lotes"><i class="fa fa-dropbox"></i><span>Lotes</span></a></li>
+			<li><a href="clientes"><i class="fa fa-users"></i><span>Clientes</span></a></li>
+         		
 
 			<li class="treeview">
 
