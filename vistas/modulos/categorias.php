@@ -59,11 +59,11 @@
 
           foreach ($categorias as $key => $value){
 
-            echo ' <tr>
+            echo ' <tr class="text-capitalize">
 
                     <td>'.($key+1).'</td>
 
-                    <td class="text-uppercase">'.$value["categoria"].'</td>
+                    <td>'.$value["categoria"].'</td>
 
                     <td>
 

@@ -34,115 +34,75 @@
 
       <div class="box-body">
         
-       <table class="table table-bordered table-striped dt-responsive tablas">
+        <table class="table table-bordered table-striped dt-responsive tablas">
          
-        <thead>
-         
-         <tr>
-           
-           <th style="width:10px">#</th>
-           <th>Imagen</th>
-           <th>Código</th>
-           <th>Nombre</th>
-           <th>Descripción</th>
-           <th>Presentación</th>
-           <th>Categoría</th>           
-           <th>Stock</th>
-           <th>Precio de compra</th>
-           <th>Precio de venta</th>
-           <th>Agregado</th>
-           <th>Acciones</th>
-
-         </tr> 
-
-        </thead>
-
-        <tbody>
-          
-          <tr>
-            <td>1</td>
-            <td><img src="vistas/img/productos/oferta_jabon_protex_limpieza_profunda.png" class="img-thumbnail" width="40px"></td>
-            <td>0001</td>
-            <td>Jabon Protex Limpieza Profunda</td>
-            <td>Tripack x 120gr barra</td>
-            <td>Barra</td>
-            <td>CUIDADO PERSONAL</td>
-            <td>20</td>
-            <td>$ 7.500</td>
-            <td>$ 9.150</td>
-            <td>2020-12-11 12:05:32</td>
-            <td>
-
-              <div class="btn-group">
-                  
-                <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-
-                <button class="btn btn-danger"><i class="fa fa-times"></i></button>
-
-              </div>  
-
-            </td>
-
-          </tr>
+          <thead>
 
            <tr>
 
-            <td>2</td>
-            <td><img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail" width="40px"></td>
-            <td>0001</td>
-            <td>Jabon Protex Limpieza Profunda</td>
-            <td>Tripack x 120gr barra</td>
-            <td>Barra</td>
-            <td>CUIDADO PERSONAL</td>
-            <td>20</td>
-            <td>$ 7.500</td>
-            <td>$ 9.150</td>
-            <td>2020-12-11 12:05:32</td>
-            <td>
+             <th style="width:10px">#</th>
+             <th>Imagen</th>
+             <th>Código</th>
+             <th>Nombre</th>
+             <th>Descripción</th>
+             <th>Presentación</th>
+             <th>Categoría</th>           
+             <th>Stock</th>
+             <th>Precio de compra</th>
+             <th>Precio de venta</th>
+             <th>Agregado</th>
+             <th>Acciones</th>
 
-              <div class="btn-group">
-                  
-                <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+           </tr> 
 
-                <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+          </thead>
 
-              </div>  
+          <tbody>
 
-            </td>
+            <?php
 
-          </tr>
+              $item = null;
 
-          <tr>
-            <td>3</td>
-            <td><img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail" width="40px"></td>
-            <td>0001</td>
-            <td>Jabon Protex Limpieza Profunda</td>
-            <td>Tripack x 120gr barra</td>
-            <td>Barra</td>
-            <td>CUIDADO PERSONAL</td>
-            <td>20</td>
-            <td>$ 7.500</td>
-            <td>$ 9.150</td>
-            <td>2020-12-11 12:05:32</td>
-            <td>
+              $valor = null;
 
-              <div class="btn-group">
-                  
-                <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+              $productos = ControladorProductos::ctrMostrarProductos($item, $valor);
 
-                <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+              foreach ($productos as $key => $value) {
+              
+                echo ' <tr>
+                  <td>'.($key+1).'</td>
+                  <td><img src="vistas/img/productos/oferta_jabon_protex_limpieza_profunda.png" class="img-thumbnail" width="40px"></td>
+                  <td>'.$value["codigo"].'</td>
+                  <td class="text-capitalize">'.$value["nombre"].'</td>
+                  <td>'.$value["descripcion"].'</td>
+                  <td>'.$value["presentacion"].'</td>
+                  <td>'.$value["categoria"].'</td>
+                  <td>'.$value["stock"].'</td>
+                  <td>'.$value["precio_compra"].'</td>
+                  <td>'.$value["precio_venta"].'</td>
+                  <td>'.$value["agregado"].'</td>
+                  <td>
+              
+                    <div class="btn-group">
 
-              </div>  
+                      <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+              
+                      <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+              
+                    </div>  
+              
+                  </td>
+              
+                </tr>';
+              
+              }
+            
+            
+            ?>
 
-            </td>
+          </tbody>
 
-          </tr>
-
-
-
-        </tbody>
-
-       </table>
+        </table>
 
       </div>
 
@@ -252,7 +212,7 @@ MODAL AGREGAR PRODUCTO
 
              <!-- ENTRADA PARA STOCK -->
 
-             <div class="form-group">
+             <!-- <div class="form-group">
               
               <div class="input-group">
               
@@ -262,7 +222,7 @@ MODAL AGREGAR PRODUCTO
 
               </div>
 
-            </div>
+            </div>  -->
 
              <!-- ENTRADA PARA PRECIO COMPRA -->
 
@@ -302,7 +262,7 @@ MODAL AGREGAR PRODUCTO
                       
                       <label>
                         
-                        <input type="checkbox" class="minimal porcentaje" checked>
+                        <input type="checkbox" class="flat-red porcentaje" checked>
                         Utilizar procentaje
                       </label>
 
