@@ -50,18 +50,57 @@
              <th>Stock</th>
              <th>Precio de compra</th>
              <th>Precio de venta</th>
-             <th>Fecha de Agregado</th>
+             <th>Agregado</th>
              <th>Acciones</th>
 
            </tr> 
 
           </thead>
 
-          <!--<tbody>
+          <tbody>
 
-           
+            <?php
 
-          </tbody> -->
+              $item = null;
+
+              $valor = null;
+
+              $productos = ControladorProductos::ctrMostrarProductos($item, $valor);
+
+              foreach ($productos as $key => $value) {
+              
+                echo ' <tr>
+                  <td>'.($key+1).'</td>
+                  <td><img src="vistas/img/productos/oferta_jabon_protex_limpieza_profunda.png" class="img-thumbnail" width="40px"></td>
+                  <td>'.$value["codigo"].'</td>
+                  <td class="text-capitalize">'.$value["nombre"].'</td>
+                  <td>'.$value["descripcion"].'</td>
+                  <td>'.$value["presentacion"].'</td>
+                  <td>'.$value["categoria"].'</td>
+                  <td>'.$value["stock"].'</td>
+                  <td>'.$value["precio_compra"].'</td>
+                  <td>'.$value["precio_venta"].'</td>
+                  <td>'.$value["agregado"].'</td>
+                  <td>
+              
+                    <div class="btn-group">
+
+                      <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+              
+                      <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+              
+                    </div>  
+              
+                  </td>
+              
+                </tr>';
+              
+              }
+            
+            
+            ?>
+
+          </tbody>
 
         </table>
 
@@ -105,47 +144,6 @@ MODAL AGREGAR PRODUCTO
 
           <div class="box-body">
 
-          <!-- ENTRADA PARA SELECCIONAR CATEGORÍA -->
-
-          <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
-
-                <select class="form-control input-lg" id="nuevaCategoria" name="nuevaCategoria" required>
-                  
-                  <option value="">Selecionar categoría</option>
-
-                  <?php
-
-                    $item = null;
-
-                    $valor = null;
-
-                    $productos = ControladorProductos::ctrMostrarProductos($item, $valor);
-
-                    foreach ($productos as $key => $value){
-
-                      echo '<option value="'.$value["categoria"].'">'.$value["categoria"].'</option>';
-
-                    }
-
-
-                  ?>
-
-                  <option value="Cuidado personal">Cuidado personal</option>
-
-                  <option value="Antigripales">Antigripales</option>
-
-                  <option value="Equipos para construcción">Antigripales</option>
-
-                </select>
-
-              </div>
-
-            </div>
-
             <!-- ENTRADA PARA EL CÓDIGO -->
             
             <div class="form-group">
@@ -183,6 +181,30 @@ MODAL AGREGAR PRODUCTO
                 <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span> 
 
                 <input type="text" class="form-control input-lg" name="nuevaDescripcion" placeholder="Ingresar descripción" required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA SELECCIONAR CATEGORÍA -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <select class="form-control input-lg" name="nuevaCategoria">
+                  
+                  <option value="">Selecionar categoría</option>
+
+                  <option value="Cuidado personal">Cuidado personal</option>
+
+                  <option value="Antigripales">Antigripales</option>
+
+                  <option value="Equipos para construcción">Antigripales</option>
+
+                </select>
 
               </div>
 
