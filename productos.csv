@@ -1,0 +1,4 @@
+"id";"imagen";"codigo";"nombre";"descripcion";"cantidad";"precio_compra";"precio_venta";"total";"id_lab";"id_tip_prod";"id_present";"id_categoria";"agregado"
+"1";"vistas/img/productos/101/105.png";"101";"JABON Protex Limpieza Profunda";"Tripack x 120gr";"21";"1900";"3166";"66486";"1";"1";"11";"9";"2021-04-19"
+"2";"vistas/img/productos/102/940.png";"201";"Noxpirin Plus";"Caja X 12 Cap";"22";"580";"966.66";"21266.7";"3";"1";"3";"18";"2021-04-18"
+"3";"vistas/img/productos/103/770.png";"301";"Minoxidil Forte";"5% Solución Tópica";"5";"31530";"52550";"262750";"4";"1";"4";"10";"2021-03-19"

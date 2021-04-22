@@ -249,11 +249,12 @@ MODAL EDITAR CATEGORÍA
 
   </div>
 
-</div>
-
+  
 ?php
 
-  $borrarCategoria = new ControladorCategorias();
-  $borrarCategoria -> ctrBorrarCategoria();
-  
+$borrarCategoria = new ControladorCategorias();
+$borrarCategoria -> ctrBorrarCategoria();
+
 ?>
+
+</div>
