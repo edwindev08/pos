@@ -49,21 +49,16 @@
              <th>Categoría</th>
              <th>laboratorio</th>           
              <th>Stock</th>
+             <th>Tipo producto</th>
              <th>Precio de compra</th>
-             <th>Precio de venta</th>
-             <th>Fecha de Agregado</th>
+             <th>Precio de venta</th>             
              <th>Acciones</th>
 
            </tr> 
 
           </thead>
 
-          <!--<tbody>
-
-           
-
-          </tbody> -->
-
+          
         </table>
 
       </div>
@@ -163,7 +158,7 @@ MODAL AGREGAR PRODUCTO
               
                 <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoNombre" placeholder="Ingresar nombre" required>
+                <input type="text" class="form-control input-lg" id="nuevoNombre" name="nuevoNombre" placeholder="Ingresar nombre" required>
 
               </div>
 
@@ -197,7 +192,7 @@ MODAL AGREGAR PRODUCTO
 
                     <?php
 
-                      $item = null;
+                      $items = null;
 
                       $valor = null;
 
@@ -217,7 +212,7 @@ MODAL AGREGAR PRODUCTO
                 </div>
 
             </div>
-
+              <!-- ENTRADA PARA SELECCIONAR LABORATORIO -->        
             <div class="form-group">
               
                 <div class="input-group">
@@ -250,8 +245,39 @@ MODAL AGREGAR PRODUCTO
                 </div>
 
             </div>
-                    
-            
+              <!-- ENTRADA PARA SELECCIONAR TIPO DE PRODUCTO -->      
+            <div class="form-group">
+              
+                <div class="input-group">
+              
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                  <select class="form-control input-lg" id="nuevoTipo" name="nuevoTipo" required>
+                  
+                    <option value="">Tipo de producto</option>
+
+                    <?php
+
+                      $item = null;
+
+                      $valor = null;
+
+                      $tipo = ControladorTipo::ctrMostrarTipo($item, $valor);
+
+                      foreach ($tipo as $key => $value){
+
+                        echo '<option value="'.$value["id_tip_prod"].'">'.$value["nombre"].'</option>';
+
+                      }
+
+
+                    ?>
+
+                  </select>
+
+                </div>
+
+            </div>
 
              <!-- ENTRADA PARA PRECIO COMPRA -->
 
@@ -263,7 +289,7 @@ MODAL AGREGAR PRODUCTO
                   
                     <span class="input-group-addon"><i class="fa fa-arrow-up"></i></span> 
 
-                    <input type="number" class="form-control input-lg" id="nuevoPrecioCompra" name="nuevoPrecioCompra" min="0" placeholder="Precio de compra" required>
+                    <input type="number" class="form-control input-lg" id="nuevoPrecioCompra" name="nuevoPrecioCompra" min="0" step="any" placeholder="Precio de compra" required>
 
                   </div>
 
@@ -277,7 +303,7 @@ MODAL AGREGAR PRODUCTO
                   
                     <span class="input-group-addon"><i class="fa fa-arrow-down"></i></span> 
 
-                    <input type="number" class="form-control input-lg" id="nuevoPrecioVenta" name="nuevoPrecioVenta" min="0" placeholder="Precio de venta" required>
+                    <input type="number" class="form-control input-lg" id="nuevoPrecioVenta" name="nuevoPrecioVenta" min="0" step="any" placeholder="Precio de venta" required>
 
                   </div>
                 
@@ -354,7 +380,7 @@ MODAL AGREGAR PRODUCTO
           $crearProducto = new ControladorProductos();
           $crearProducto -> ctrCrearProducto();
 
-      ?>
+      ?> 
 
     </div>
 

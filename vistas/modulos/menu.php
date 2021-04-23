@@ -19,7 +19,7 @@
 
 				<a href="usuarios">
 
-					<i class="fa fa-user"></i>
+					<i class="fa fa-id-card"></i>
 					<span>Usuarios</span>
 
 				</a>
@@ -29,7 +29,7 @@
 			<li class="nav-header">
 				<a href="#">
 
-					<!-- <i class="fa fa-list-ul"></i> -->
+					<i class="fa fa-list-ul"></i>
 
 						<span>GESTIÓN DE ALMACEN</span>
 
@@ -40,9 +40,9 @@
 					
 			</li>
 			<li><a href="categorias"><i class="fa fa-th"></i><span>Categorías</span></a></li>
-			<li><a href="productos"><i class="fa fa-product-hunt"></i><span>Productos</span></a></li>
+			<li><a href="productos"><i class="fa fa-capsules"></i><span>Productos</span></a></li>
 			<li><a href="proveedores"><i class="fa fa-truck"></i><span>Proveedores</span></a></li>
-			<li><a href="lotes"><i class="fa fa-dropbox"></i><span>Lotes</span></a></li>
+			<li><a href="lotes"><i class="fa fa-boxes"></i><span>Lotes</span></a></li>
 			<li><a href="clientes"><i class="fa fa-users"></i><span>Clientes</span></a></li>
          		
 

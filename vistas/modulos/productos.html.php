@@ -46,61 +46,23 @@
              <th>Nombre</th>
              <th>Descripción</th>
              <th>Presentación</th>
-             <th>Categoría</th>           
+             <th>Categoría</th>
+             <th>laboratorio</th>           
              <th>Stock</th>
+             <th>Tipo producto</th>
              <th>Precio de compra</th>
-             <th>Precio de venta</th>
-             <th>Agregado</th>
+             <th>Precio de venta</th>             
              <th>Acciones</th>
 
            </tr> 
 
           </thead>
 
-          <tbody>
+          <!--<tbody>
 
-            <?php
+           
 
-              $item = null;
-
-              $valor = null;
-
-              $productos = ControladorProductos::ctrMostrarProductos($item, $valor);
-
-              foreach ($productos as $key => $value) {
-              
-                echo ' <tr>
-                  <td>'.($key+1).'</td>
-                  <td><img src="vistas/img/productos/oferta_jabon_protex_limpieza_profunda.png" class="img-thumbnail" width="40px"></td>
-                  <td>'.$value["codigo"].'</td>
-                  <td class="text-capitalize">'.$value["nombre"].'</td>
-                  <td>'.$value["descripcion"].'</td>
-                  <td>'.$value["presentacion"].'</td>
-                  <td>'.$value["categoria"].'</td>
-                  <td>'.$value["stock"].'</td>
-                  <td>'.$value["precio_compra"].'</td>
-                  <td>'.$value["precio_venta"].'</td>
-                  <td>'.$value["agregado"].'</td>
-                  <td>
-              
-                    <div class="btn-group">
-
-                      <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-              
-                      <button class="btn btn-danger"><i class="fa fa-times"></i></button>
-              
-                    </div>  
-              
-                  </td>
-              
-                </tr>';
-              
-              }
-            
-            
-            ?>
-
-          </tbody>
+          </tbody> -->
 
         </table>
 
@@ -144,6 +106,41 @@ MODAL AGREGAR PRODUCTO
 
           <div class="box-body">
 
+          <!-- ENTRADA PARA SELECCIONAR CATEGORÍA -->
+
+          <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <select class="form-control input-lg" id="nuevaCategoria" name="nuevaCategoria" required>
+                  
+                  <option value="">Seleccionar categoría</option>
+
+                  <?php
+
+                    $item = null;
+
+                    $valor = null;
+
+                    $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
+
+                    foreach ($categorias as $key => $value){
+
+                      echo '<option value="'.$value["id"].'">'.$value["categoria"].'</option>';
+
+                    }
+
+
+                  ?>
+
+                </select>
+
+              </div>
+
+            </div>
+
             <!-- ENTRADA PARA EL CÓDIGO -->
             
             <div class="form-group">
@@ -152,7 +149,7 @@ MODAL AGREGAR PRODUCTO
               
                 <span class="input-group-addon"><i class="fa fa-code"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoCodigo" placeholder="Ingresar código" required>
+                <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" placeholder="Ingresar código" readonly required>
 
               </div>
 
@@ -166,7 +163,7 @@ MODAL AGREGAR PRODUCTO
               
                 <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoNombre" placeholder="Ingresar nombre" required>
+                <input type="text" class="form-control input-lg" id="nuevoNombre" name="nuevoNombre" placeholder="Ingresar nombre" required>
 
               </div>
 
@@ -186,55 +183,118 @@ MODAL AGREGAR PRODUCTO
 
             </div>
 
-            <!-- ENTRADA PARA SELECCIONAR CATEGORÍA -->
+            <!-- ENTRADA PARA SELECCIONAR Presentacion -->
 
             <div class="form-group">
               
-              <div class="input-group">
+                <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span> 
 
-                <select class="form-control input-lg" name="nuevaCategoria">
+                  <select class="form-control input-lg" id="nuevaPresentacion" name="nuevaPresentacion" required>
                   
-                  <option value="">Selecionar categoría</option>
+                    <option value="">Seleccionar Presentacion</option>
 
-                  <option value="Cuidado personal">Cuidado personal</option>
+                    <?php
 
-                  <option value="Antigripales">Antigripales</option>
+                      $item = null;
 
-                  <option value="Equipos para construcción">Antigripales</option>
+                      $valor = null;
 
-                </select>
+                      $presentacion = ControladorPresentacion::ctrMostrarPresentacion($item, $valor);
 
-              </div>
+                      foreach ($presentacion as $key => $value){
+
+                        echo '<option value="'.$value["id_presentacion"].'">'.$value["nombre"].'</option>';
+
+                      }
+
+
+                    ?>
+
+                  </select>
+
+                </div>
 
             </div>
-
-             <!-- ENTRADA PARA STOCK -->
-
-             <!-- <div class="form-group">
+              <!-- ENTRADA PARA SELECCIONAR LABORATORIO -->        
+            <div class="form-group">
               
-              <div class="input-group">
+                <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-check"></i></span> 
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span> 
 
-                <input type="number" class="form-control input-lg" name="nuevoStock" min="0" placeholder="Stock" required>
+                  <select class="form-control input-lg" id="nuevoLaboratorio" name="nuevoLaboratorio" required>
+                  
+                    <option value="">Seleccionar Laboratorio</option>
 
-              </div>
+                    <?php
 
-            </div>  -->
+                      $item = null;
+
+                      $valor = null;
+
+                      $laboratorio = ControladorLaboratorio::ctrMostrarLaboratorio($item, $valor);
+
+                      foreach ($laboratorio as $key => $value){
+
+                        echo '<option value="'.$value["id_laboratorio"].'">'.$value["nombre"].'</option>';
+
+                      }
+
+
+                    ?>
+
+                  </select>
+
+                </div>
+
+            </div>
+              <!-- ENTRADA PARA SELECCIONAR TIPO DE PRODUCTO -->      
+            <div class="form-group">
+              
+                <div class="input-group">
+              
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                  <select class="form-control input-lg" id="nuevoTipo" name="nuevoTipo" required>
+                  
+                    <option value="">Tipo de producto</option>
+
+                    <?php
+
+                      $item = null;
+
+                      $valor = null;
+
+                      $tipo = ControladorTipo::ctrMostrarTipo($item, $valor);
+
+                      foreach ($tipo as $key => $value){
+
+                        echo '<option value="'.$value["id_tip_prod"].'">'.$value["nombre"].'</option>';
+
+                      }
+
+
+                    ?>
+
+                  </select>
+
+                </div>
+
+            </div>
 
              <!-- ENTRADA PARA PRECIO COMPRA -->
 
              <div class="form-group row">
 
-                <div class="col-xs-6">
+                <div class="col-xs-12 col-sm-6">
                 
                   <div class="input-group">
                   
                     <span class="input-group-addon"><i class="fa fa-arrow-up"></i></span> 
 
-                    <input type="number" class="form-control input-lg" name="nuevoPrecioCompra" min="0" placeholder="Precio de compra" required>
+                    <input type="number" class="form-control input-lg" id="nuevoPrecioCompra" name="nuevoPrecioCompra" min="0" step="any" placeholder="Precio de compra" required>
 
                   </div>
 
@@ -242,13 +302,13 @@ MODAL AGREGAR PRODUCTO
 
                 <!-- ENTRADA PARA PRECIO VENTA -->
 
-                <div class="col-xs-6">
+                <div class="col-xs-12 col-sm-6">
                 
                   <div class="input-group">
                   
                     <span class="input-group-addon"><i class="fa fa-arrow-down"></i></span> 
 
-                    <input type="number" class="form-control input-lg" name="nuevoPrecioVenta" min="0" placeholder="Precio de venta" required>
+                    <input type="number" class="form-control input-lg" id="nuevoPrecioVenta" name="nuevoPrecioVenta" min="0" step="any" placeholder="Precio de venta" required>
 
                   </div>
                 
@@ -272,7 +332,7 @@ MODAL AGREGAR PRODUCTO
 
                   <!-- ENTRADA PARA PORCENTAJE -->
 
-                  <div class="col-xs-6" style="padding:0">
+                  <div class="col-xs-12 col-sm-6" style="padding:0">
                     
                     <div class="input-group">
                       
@@ -294,11 +354,11 @@ MODAL AGREGAR PRODUCTO
               
               <div class="panel">SUBIR IMAGEN</div>
 
-              <input type="file" id="nuevaImagen" name="nuevaImagen">
+              <input type="file" class="nuevaImagen" name="nuevaImagen">
 
               <p class="help-block">Peso máximo de la imagen 2MB</p>
 
-              <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail" width="100px">
+              <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
 
             </div>
 
@@ -319,6 +379,13 @@ MODAL AGREGAR PRODUCTO
         </div>
 
       </form>
+
+      <?php
+
+          $crearProducto = new ControladorProductos();
+          $crearProducto -> ctrCrearProducto();
+
+      ?> 
 
     </div>
 
