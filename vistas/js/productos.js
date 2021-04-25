@@ -1,6 +1,3 @@
-/*=============================================
-CARGAR LA TABLA DINÁMICA DE PRODUCTOS
-=============================================*/
 
 /*$.ajax({
 
@@ -11,6 +8,9 @@ CARGAR LA TABLA DINÁMICA DE PRODUCTOS
         	}
 
 })*/
+/*=============================================
+CARGAR LA TABLA DINÁMICA DE PRODUCTOS
+=============================================*/
 
 $('.tablaProductos').DataTable( {
         "ajax": "ajax/datatable-productos.ajax.php",
@@ -67,7 +67,7 @@ $("#nuevaCategoria").change(function(){
       	processData: false,
       	dataType:"json",
       	success:function(respuesta){
-			
+			  
 			if(!respuesta){
 
 				var nuevoCodigo = idCategoria+"01";
@@ -83,12 +83,11 @@ $("#nuevaCategoria").change(function(){
 	})
 })
 
-
 /*=============================================
 AGREGANDO PRECIO DE VENTA
 =============================================*/
 
-$("#nuevoPrecioCompra").change(function(){
+$("#nuevoPrecioCompra", "#editarPrecioCompra").change(function(){
 
 	if($(".porcentaje").prop("checked")){
 
@@ -101,7 +100,6 @@ $("#nuevoPrecioCompra").change(function(){
 
 		$("#editarPrecioVenta").val(editarPorcentaje);
 		$("#editarPrecioVenta").prop("readonly",true);
-		console.log("valorPorcentaje", valorPorcentaje);
 
 	}
 })
@@ -191,4 +189,113 @@ $(".nuevaImagen").change(function(){
   		})
 
   	}
+})
+
+/*=============================================
+EDITAR PRODUCTO
+=============================================*/
+
+$(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
+
+	var idProducto = $(this).attr("idProducto");
+	
+	var datos = new FormData();
+    datos.append("idProducto", idProducto);
+	
+     $.ajax({
+
+      url:"ajax/productos.ajax.php",
+      method: "POST",
+      data: datos,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType:"json",
+      success:function(respuesta){
+	
+
+		  var datosCategoria = new FormData();
+          datosCategoria.append("idCategoria",respuesta["id_categoria"]);
+		  
+
+           $.ajax({
+
+              url:"ajax/categorias.ajax.php",
+              method: "POST",
+              data: datosCategoria,
+              cache: false,
+              contentType: false,
+              processData: false,
+              dataType:"json",
+              success:function(respuesta){
+                  
+                  $("#editarCategoria").val(respuesta["id"]);
+                  $("#editarCategoria").html(respuesta["categoria"]);
+
+              }
+
+          })
+
+		  
+
+		  
+
+           $("#editarCodigo").val(respuesta["codigo"]);
+
+		   $("#editarNombre").val(respuesta["nombre"]);
+		   
+           $("#editarDescripcion").val(respuesta["descripcion"]);
+
+           $("#editarStock").val(respuesta["stock"]);
+		   
+           $("#editarPrecioCompra").val(respuesta["precio_compra"]);
+
+           $("#editarPrecioVenta").val(respuesta["precio_venta"]);
+
+           if(respuesta["imagen"] != ""){
+
+           	$("#imagenActual").val(respuesta["imagen"]);
+
+           	$(".previsualizar").attr("src",  respuesta["imagen"]);
+
+           }          
+         
+
+      } 
+
+  })
+
+})
+
+/*=============================================
+ELIMINAR PRODUCTO
+=============================================*/
+
+$(".tablaProductos tbody").on("click", "button.btnEliminarProducto", function(){
+
+	var idProducto = $(this).attr("idProducto");
+	var codigo = $(this).attr("codigo");
+	var imagen = $(this).attr("imagen");
+	
+	swal({
+
+		title: '¿Está seguro de borrar el producto?',
+		text: "¡Si no lo está puede cancelar la accíón!",
+		type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, borrar producto!'
+        }).then(function(result){
+			
+        if (result.value) {
+
+        	window.location = "index.php?ruta=productos&idProducto="+idProducto+"&imagen="+imagen+"&codigo="+codigo;
+
+        }
+
+
+	})
+
 })

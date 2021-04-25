@@ -10,7 +10,7 @@
 
     <ol class="breadcrumb">
       
-      <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
       
       <li class="active">Administrar lotes</li>
     
@@ -18,34 +18,237 @@
 
   </section>
 
-  <!-- Main content -->
   <section class="content">
 
-    <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title">Title</h3>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarLote">Agregar Lote</button>
+      </div>
+        <div class="box-body">
+        
+          <table class="table table-bordered table-striped dt-responsive tablaLotes">
+         
+            <thead>
 
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                  title="Collapse">
-            <i class="fa fa-minus"></i></button>
-          <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-            <i class="fa fa-times"></i></button>
+              <tr>
+  
+               <th style="width:10px">#</th>
+               <th>Codigo</th>
+               <th>Producto</th>
+               <th>Stock</th>
+               <th>Proveedor</th>
+               <th>Presentación</th>
+               <th>Vencimiento</th>
+               <th>Acciones</th>
+               
+              </tr> 
+
+            </thead>
+
+          
+          </table>
+
         </div>
-      </div>
-      <div class="box-body">
-        Start creating your amazing application!
-      </div>
-      <!-- /.box-body -->
-      <div class="box-footer">
-        Footer
-      </div>
-      <!-- /.box-footer-->
+
     </div>
-    <!-- /.box -->
 
   </section>
-  <!-- /.content -->
+
 </div>
-<!-- /.content-wrapper -->
+
+<!--=====================================
+MODAL AGREGAR LOTE
+======================================-->
+
+<div id="modalAgregarLote" class="modal fade" role="dialog">
+  
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" enctype="multipart/form-data">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Agregar Lote</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+      <div class="modal-body">
+
+        <div class="box-body">
+
+          <!-- ENTRADA PARA SELECCIONAR PRODUCTO -->
+
+          <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <select class="form-control input-lg" id="nuevoProducto" name="nuevoProducto" required>
+                  
+                  <option value="">Seleccionar producto</option>
+
+                  <?php
+
+                    $item = null;
+
+                    $valor = null;
+
+                    $productos = ControladorProductos::ctrMostrarProductos($item, $valor);
+
+                    foreach ($productos as $key => $value){
+
+                      echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
+
+                    }
+
+
+                  ?>
+
+                </select>
+
+              </div>
+
+          </div>
+
+           <!-- ENTRADA PARA EL STOCK -->
+
+          <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-pills"></i></span> 
+
+                <input type="number" class="form-control input-lg" id="nuevoStock" name="nuevoStock" placeholder="Ingresar Stock" required>
+
+              </div>
+
+          </div>
+
+            
+            <!-- ENTRADA PARA LA PROVEEDOR -->
+
+          <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <select class="form-control input-lg" id="nuevoProveedor" name="nuevoProveedor" required>
+                  
+                  <option value="">Seleccionar Proveedor</option>
+
+                  <?php
+
+                    $item = null;
+
+                    $valor = null;
+
+                    $proveedor = ControladorProveedor::ctrMostrarProveedor($item, $valor);
+
+                    foreach ($proveedor as $key => $value){
+
+                      echo '<option value="'.$value["id_proveedor"].'">'.$value["nombre"].'</option>';
+
+                    }
+
+
+                  ?>
+
+                </select>
+
+              </div>
+
+          </div>
+
+          <!-- ENTRADA PARA SELECCIONAR Presentacion -->
+
+          <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+  
+                  <select class="form-control input-lg" id="nuevaPresentacion" name="nuevaPresentacion" required>
+                    
+                    <option value="">Seleccionar Presentacion</option>
+  
+                    <?php
+  
+                      $items = null;
+  
+                      $valor = null;
+  
+                      $presentacion = ControladorPresentacion::ctrMostrarPresentacion($item, $valor);
+  
+                      foreach ($presentacion as $key => $value){
+  
+                        echo '<option value="'.$value["id_presentacion"].'">'.$value["nombre"].'</option>';
+  
+                      }
+  
+                    ?>
+  
+                    </select>
+  
+                  </div>
+  
+            </div>
+            
+            <!-- ENTRADA PARA VENCIMIENTO -->
+
+          <div class="form-group" style="width:80%;">
+
+            <label>Fecha de Vencimiento</label>
+
+              <div class="input-group date">
+                <div class="input-group-addon"><i class="fas fa-calendar"></i>
+                </div>    
+                <input type="date" class="form-control pull-right" id="newDate" name="newDate">
+
+            </div>
+
+          </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Guardar Lote</button>
+
+        </div>
+
+      </form>
+
+      <?php
+
+          $crearLote = new ControladorLote();
+          $crearLote -> ctrCrearLote();
+
+      ?> 
+
+      </div>
+
+    </div>
+  
+    </div>  
+
+  </div>  
+
+</div>  
