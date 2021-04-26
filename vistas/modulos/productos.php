@@ -47,12 +47,13 @@
              <th>Descripción</th>
              <th>Presentación</th>
              <th>Categoría</th>
+             <th>Acciones</th>
              <th>laboratorio</th>           
              <th>Stock</th>
              <th>Tipo producto</th>
              <th>Precio de compra</th>
              <th>Precio de venta</th>             
-             <th>Acciones</th>
+             
 
             </tr> 
 
@@ -156,7 +157,7 @@ MODAL AGREGAR PRODUCTO
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span> 
+                <span class="input-group-addon"><i class="fas fa-prescription-bottle-alt"></i></span> 
 
                 <input type="text" class="form-control input-lg" id="nuevoNombre" name="nuevoNombre" placeholder="Ingresar nombre" required>
 
@@ -170,7 +171,7 @@ MODAL AGREGAR PRODUCTO
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span> 
+                <span class="input-group-addon"><i class="fas fa-prescription-bottle-alt"></i></span> 
 
                 <input type="text" class="form-control input-lg" name="nuevaDescripcion" placeholder="Ingresar descripción" required>
 
@@ -493,6 +494,8 @@ MODAL EDITAR PRODUCTO
 
               </div>
 
+            </div>
+
               <!-- ENTRADA PARA SELECCIONAR Presentacion -->
 
             <div class="form-group">
@@ -632,7 +635,7 @@ MODAL EDITAR PRODUCTO
                       
                       <label>
                         
-                        <input type="checkbox" class="minimal porcentaje" checked>
+                        <input type="checkbox" class="flat-red porcentaje" checked>
                         Utilizar procentaje
                       </label>
 

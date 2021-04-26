@@ -42,7 +42,7 @@ class ControladorProductos{
 					$nuevoAlto = 500;
 
 					/*=============================================
-					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+					CREO EL DIRECTORIO DONDE VOY A GUARDAR LA FOTO DEL PRODUCTO
 					=============================================*/
 
 					$directorio = "vistas/img/productos/".$_POST["nuevoCodigo"];
@@ -50,13 +50,13 @@ class ControladorProductos{
 					mkdir($directorio, 0755);
 
 					/*=============================================
-					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					DE ACUERDO AL TIPO DE IMAGEN APLICO LAS FUNCIONES POR DEFECTO DE PHP
 					=============================================*/
 
 					if($_FILES["nuevaImagen"]["type"] == "image/jpeg"){
 
 						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						GUARDO LA IMAGEN EN EL DIRECTORIO
 						=============================================*/
 
 						$aleatorio = mt_rand(100,999);
@@ -76,7 +76,7 @@ class ControladorProductos{
 					if($_FILES["nuevaImagen"]["type"] == "image/png"){
 
 						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						GUARDO LA IMAGEN EN EL DIRECTORIO
 						=============================================*/
 
 						$aleatorio = mt_rand(100,999);
@@ -168,26 +168,26 @@ class ControladorProductos{
 			   preg_match('/^[0-9.]+$/', $_POST["editarPrecioVenta"])){
 
 		   		/*=============================================
-				VALIDAR IMAGEN
+				VALIDO IMAGEN
 				=============================================*/
 
 			   	$ruta = $_POST["imagenActual"];
 
-			   	if(isset($_FILES["nuevaImagen"]["tmp_name"]) && !empty($_FILES["nuevaImagen"]["tmp_name"])){
+			   	if(isset($_FILES["editarImagen"]["tmp_name"]) && !empty($_FILES["editarImagen"]["tmp_name"])){
 
-					list($ancho, $alto) = getimagesize($_FILES["nuevaImagen"]["tmp_name"]);
+					list($ancho, $alto) = getimagesize($_FILES["editarImagen"]["tmp_name"]);
 
 					$nuevoAncho = 500;
 					$nuevoAlto = 500;
 
 					/*=============================================
-					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+					CREO EL DIRECTORIO DONDE SE VA GUARDAR LA FOTO
 					=============================================*/
 
 					$directorio = "vistas/img/productos/".$_POST["editarCodigo"];
 
 					/*=============================================
-					PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BD
+					EXISTE OTRA IMAGEN EN LA BD?
 					=============================================*/
 
 					if(!empty($_POST["imagenActual"]) && $_POST["imagenActual"] != "vistas/img/productos/default/anonymous.png"){
@@ -201,20 +201,20 @@ class ControladorProductos{
 					}
 					
 					/*=============================================
-					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					APLICO FUNCIONES POR DEFECTO DE PHP
 					=============================================*/
 
-					if($_FILES["nuevaImagen"]["type"] == "image/jpeg"){
+					if($_FILES["editarImagen"]["type"] == "image/jpeg"){
 
 						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						GUARDO LA IMAGEN EN EL DIRECTORIO
 						=============================================*/
 
 						$aleatorio = mt_rand(100,999);
 
 						$ruta = "vistas/img/productos/".$_POST["editarCodigo"]."/".$aleatorio.".jpg";
 
-						$origen = imagecreatefromjpeg($_FILES["nuevaImagen"]["tmp_name"]);						
+						$origen = imagecreatefromjpeg($_FILES["editarImagen"]["tmp_name"]);						
 
 						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
@@ -224,17 +224,17 @@ class ControladorProductos{
 
 					}
 
-					if($_FILES["nuevaImagen"]["type"] == "image/png"){
+					if($_FILES["editarImagen"]["type"] == "image/png"){
 
 						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						GUARDO LA IMAGEN EN EL DIRECTORIO
 						=============================================*/
 
 						$aleatorio = mt_rand(100,999);
 
 						$ruta = "vistas/img/productos/".$_POST["editarCodigo"]."/".$aleatorio.".png";
 
-						$origen = imagecreatefrompng($_FILES["nuevaImagen"]["tmp_name"]);						
+						$origen = imagecreatefrompng($_FILES["editarImagen"]["tmp_name"]);						
 
 						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
@@ -260,7 +260,7 @@ class ControladorProductos{
 								"imagen" => $ruta);
 
 				$respuesta = ModeloProductos::mdlEditarProducto($tabla, $datos);
-
+				echo $respuesta;
 				if($respuesta == "ok"){
 
 					echo'<script>
@@ -281,7 +281,7 @@ class ControladorProductos{
 						</script>';
 
 				}
-
+				
 
 			}else{
 

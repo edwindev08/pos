@@ -91,7 +91,7 @@ class ControladorCategorias{
 							   "id"=>$_POST["idCategoria"]);
 
 				$respuesta = ModeloCategorias::mdlEditarCategoria($tabla, $datos);
-
+				
 				if($respuesta == "ok"){
 
 					echo'<script>
@@ -147,11 +147,12 @@ class ControladorCategorias{
 
 		if(isset($_GET["idCategoria"])){
 
-			$tabla ="Categorias";
+			$tabla ="categorias";
 			$datos = $_GET["idCategoria"];
 
 			$respuesta = ModeloCategorias::mdlBorrarCategoria($tabla, $datos);
-
+			
+			
 			if($respuesta == "ok"){
 
 				echo'<script>

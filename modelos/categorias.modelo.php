@@ -95,7 +95,7 @@ class ModeloCategorias{
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 
 		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
-
+		
 		if($stmt -> execute()){
 
 			return "ok";
@@ -105,7 +105,7 @@ class ModeloCategorias{
 			return "error";	
 
 		}
-
+		
 		$stmt -> close();
 
 		$stmt = null;

@@ -64,6 +64,15 @@ session_start();
   <script src="vistas/plugins/iCheck/icheck.min.js"></script>
   <!-- bootstrap datepicker -->
   <script src="vistas/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+  <!-- InputMask -->
+  <script src="vistas/plugins/input-mask/jquery.inputmask.js"></script>
+  <script src="vistas/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+  <script src="vistas/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
+  <!-- jQuery Number 
+  <script src="vistas/plugins/jqueryNumber/jquerynumber.min.js"></script> -->
+
+  
 </head>
 
 <!--=====================================
@@ -144,5 +153,6 @@ CUERPO DOCUMENTO
  <script src="vistas/js/categorias.js"></script>
  <script src="vistas/js/productos.js"></script>
  <script src="vistas/js/lotes.js"></script>
+ <script src="vistas/js/clientes.js"></script>
 </body>
 </html>

@@ -34,6 +34,8 @@ ELIMINAR CATEGORIA
 $(".tablas").on("click", ".btnEliminarCategoria", function(){
 
 	 var idCategoria = $(this).attr("idCategoria");
+	 
+
 
 	 swal({
 	 	title: '¿Está seguro de borrar la categoría?',
