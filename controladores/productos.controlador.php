@@ -15,6 +15,7 @@ class ControladorProductos{
         return $respuesta;
     }
 
+
     /*=============================================
 	CREAR PRODUCTO
 =============================================*/
@@ -260,7 +261,7 @@ class ControladorProductos{
 								"imagen" => $ruta);
 
 				$respuesta = ModeloProductos::mdlEditarProducto($tabla, $datos);
-				echo $respuesta;
+				
 				if($respuesta == "ok"){
 
 					echo'<script>

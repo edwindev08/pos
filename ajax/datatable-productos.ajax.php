@@ -18,7 +18,7 @@ class TablaProductos{
     	$valor = null;
 
   		$productos = ControladorProductos::ctrMostrarProductos($item, $valor);
-
+      
       $datosJson = '{
         "data": [';
 
@@ -31,20 +31,22 @@ class TablaProductos{
 
           $btns = "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fas fa-edit'></i></button><button class='btn btn-danger btnEliminarProducto' idProducto='".$productos[$i]["id"]."' codigo='".$productos[$i]["codigo"]."' imagen='".$productos[$i]["imagen"]."'><i class='fas fa-trash-alt'></i></button></div>";
 
+          $precio_venta = "<td>$".number_format($productos[$i]["precio_venta"],2)."</td>";
+          $precio_compra = "<td>$".number_format($productos[$i]["precio_compra"],2)."</td>";
           /*=============================================
  	        Declaro stock para calcular limites
   	      =============================================*/ 
-          if($productos[$i]["stock"] <= 10){
+          if($productos[$i]["stocks"] <= 10){
 
-            $stock = "<button class='btn btn-danger'>".$productos[$i]["stock"]."</button>";
+            $stock = "<label class='badge bg-red'>".$productos[$i]["stocks"]."</label>";
 
-          }else if($productos[$i]["stock"] > 11 && $productos[$i]["stock"] <= 15){
+          }else if($productos[$i]["stocks"] > 11 && $productos[$i]["stocks"] <= 15){
 
-            $stock = "<button class='btn btn-warning'>".$productos[$i]["stock"]."</button>";
+            $stock = "<label class='badge bg-yellow'>".$productos[$i]["stocks"]."</label>";
 
           }else{
 
-            $stock = "<button class='btn btn-success'>".$productos[$i]["stock"]."</button>";
+            $stock = "<label class='badge bg-green'>".$productos[$i]["stocks"]."</label>";
 
           }
           
@@ -59,14 +61,14 @@ class TablaProductos{
                 "'.$productos[$i]["codigo"].'",
                 "'.$productos[$i]["nombre"].'",
                 "'.$productos[$i]["descripcion"].'",
-                "'.$productos[$i]["presentacion"].'",
-                "'.$productos[$i]["categoria"].'",
-                "'.$btns.'",
-                "'.$productos[$i]["laboratorio"].'",
                 "'.$stock.'",
-                "'.$productos[$i]["tipo"].'",
-                "'.$productos[$i]["precio_compra"].'",
-                "'.$productos[$i]["precio_venta"].'"
+                "'.$precio_compra.'",
+                "'.$precio_venta.'",
+                "'.$productos[$i]["presentacion"].'",
+                "'.$productos[$i]["categoria"].'",                
+                "'.$productos[$i]["laboratorio"].'",                
+                "'.$productos[$i]["tipo"].'",                
+                "'.$btns.'"
                 
           ],';
         }

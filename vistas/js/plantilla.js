@@ -38,7 +38,7 @@ $(".tablas").DataTable({
 
 });
 /*=============================================
- //iCheck for checkbox and radio inputs
+ iCheck for checkbox and radio inputs
 =============================================*/
 
 $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
@@ -64,6 +64,8 @@ $('[data-mask]').inputmask()
 =============================================*/
 
 $('#datepicker').datepicker({
+
+	format: 'yyyy/mm/dd',
 
 	autoclose: true
 

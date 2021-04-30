@@ -26,7 +26,7 @@
       </div>
         <div class="box-body">
         
-          <table class="table table-bordered table-striped dt-responsive tablaLotes">
+          <table class="table table-bordered table-striped dt-responsive tablas">
          
             <thead>
 
@@ -44,6 +44,54 @@
               </tr> 
 
             </thead>
+
+            <tbody>
+            <?php
+
+              $item = null;
+              $valor = null;
+
+              $lotes = ControladorLote::ctrMostrarLote($item, $valor);
+
+              foreach ($lotes as $key => $value) {
+              
+              
+                echo '
+                  <tr>
+              
+                    <td>'.($key+1).'</td>
+              
+                    <td>'.$value["codigo"].'</td>
+              
+                    <td>'.$value["producto"].'</td>
+              
+                    <td>'.$value["stock"].'</td>
+              
+                    <td>'.$value["proveedor"].'</td>
+              
+                    <td>'.$value["presentacion"].'</td>
+              
+                    <td>'.$value["vencimiento"].'</td>
+              
+                    <td>
+              
+                      <div class="btn-group">
+              
+                        <button class="btn btn-warning btnEditarLote"       data-toggle="modal" data-target="#modalEditarLote"     idLote="'.$value["id_lote"].'"><i class="fas fa-edit"></i></button>
+              
+                        <button class="btn btn-danger btnEliminarLote" idLote="'.$value["id_lote"].'"><i class="fas fa-trash-alt"></i></button>
+              
+                      </div>  
+              
+                    </td>
+              
+                  </tr>';
+              
+              }
+
+              ?>
+
+            </tbody>
 
           
           </table>
@@ -156,7 +204,7 @@ MODAL AGREGAR LOTE
 
                     $valor = null;
 
-                    $proveedor = ControladorProveedor::ctrMostrarProveedor($item, $valor);
+                    $proveedor = ControladorProveedores::ctrMostrarProveedores($item, $valor);
 
                     foreach ($proveedor as $key => $value){
 
@@ -208,19 +256,24 @@ MODAL AGREGAR LOTE
             </div>
             
             <!-- ENTRADA PARA VENCIMIENTO -->
+            
+            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy/mm/dd">
+            
+             <label>Fecha de Vencimiento</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fas fa-calendar"></i></span> 
 
-          <div class="form-group" style="width:80%;">
+                <input type="text" class="form-control datepicker" name="newDate" id="newDate"  required>
 
-            <label>Fecha de Vencimiento</label>
-
-              <div class="input-group date">
-                <div class="input-group-addon"><i class="fas fa-calendar"></i>
-                </div>    
-                <input type="date" class="form-control pull-right" id="newDate" name="newDate">
+              </div>
 
             </div>
-
+  
           </div>
+
+        </div>
 
         <!--=====================================
         PIE DEL MODAL
@@ -241,14 +294,117 @@ MODAL AGREGAR LOTE
           $crearLote = new ControladorLote();
           $crearLote -> ctrCrearLote();
 
-      ?> 
+      ?>
+     
 
-      </div>
-
-    </div>
-  
     </div>  
 
   </div>  
 
 </div>  
+
+<!--=====================================
+MODAL EDITAR LOTE
+======================================-->
+
+<div id="modalEditarLote" class="modal fade" role="dialog">
+  
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="post">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Editar lote</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+          
+
+           <!-- ENTRADA PARA EL STOCK -->
+
+          <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-pills"></i></span> 
+
+                <input type="number" class="form-control input-lg" id="editarStock" name="editarStock" placeholder="Ingresar Stock" required>
+                <input type="hidden" id="idLote" name="idLote">
+
+              </div>
+
+          </div>
+            
+            <!-- ENTRADA PARA VENCIMIENTO -->
+            
+            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy/mm/dd">
+            
+             <label>Fecha de Vencimiento</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fas fa-calendar"></i></span> 
+
+                <input type="text" class="form-control datepicker" name="editDate" id="editDate"  required>
+
+              </div>
+
+            </div>
+    
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+
+        </div>
+
+      </form>
+
+      <?php
+
+        $editarLote = new ControladorLote();
+        $editarLote -> ctrEditarLote();
+
+      ?>
+
+    
+
+    </div>
+
+  </div>
+
+</div>
+
+<?php
+
+  $eliminarLote = new ControladorLote();
+  $eliminarLote -> ctrEliminarLote();
+
+?>
+

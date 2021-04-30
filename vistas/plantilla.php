@@ -19,7 +19,7 @@ session_start();
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="vistas/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="vistas/bower_components/font-awesome/css/font-awesome.min.css">*/
+  <link rel="stylesheet" href="vistas/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Font Awesome -->
  <link rel="stylesheet" href="vistas/bower_components/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -154,5 +154,7 @@ CUERPO DOCUMENTO
  <script src="vistas/js/productos.js"></script>
  <script src="vistas/js/lotes.js"></script>
  <script src="vistas/js/clientes.js"></script>
+ <script src="vistas/js/proveedores.js"></script>
+ <script src="vistas/js/ventas.js"></script>
 </body>
 </html>

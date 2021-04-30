@@ -3,56 +3,82 @@
 require_once "../controladores/productos.controlador.php";
 require_once "../modelos/productos.modelo.php";
 
+require_once "../controladores/categorias.controlador.php";
+require_once "../modelos/categorias.modelo.php";
+
 class AjaxProductos{
 
+  /*=============================================
+  GENERAR CÓDIGO A PARTIR DE ID CATEGORIA
+  =============================================*/
+  public $idCategoria;
 
-    /*=============================================
-      EDITAR PRODUCTO
-      =============================================*/ 
+  public function ajaxCrearCodigoProducto(){
 
-      public $idProducto;
-    
-      public function ajaxEditarProducto(){
-      
-          $item = "id";
-          $valor = $this->idProducto;
-          
-          $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor);
-          
-          echo json_encode($respuesta);
-      
-      }
-  
+  	$item = "id_categoria";
+  	$valor = $this->idCategoria;
 
-    /*=============================================
-    GENERAR CÓDIGO A PARTIR DE ID CATEGORIA
-    =============================================*/
+  	$respuesta = ControladorProductos::ctrMostrarProductos($item, $valor);
 
-    public $idCategoria;
+  	echo json_encode($respuesta);
 
-    public function ajaxCrearCodigoProducto(){
+  }
 
-        $item = "id_categoria";
 
-        $valor = $this->idCategoria;
+  /*=============================================
+  EDITAR PRODUCTO
+  =============================================*/ 
 
-        $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor);
+  public $idProducto;
+  public $traerProductos;
+  public $nombreProducto;
 
-        echo json_encode($respuesta);
+  public function ajaxEditarProducto(){
+
+    if($this->traerProductos == "ok"){
+
+      $item = null;
+      $valor = null;
+
+      $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor);
+
+      echo json_encode($respuesta);
+
+
+    }else if($this->nombreProducto != ""){
+
+      $item = "nombre";
+      $valor = $this->nombreProducto;
+
+      $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor);
+
+      echo json_encode($respuesta);
+
+    }else{
+
+      $item = "id";
+      $valor = $this->idProducto;
+
+      $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor);
+
+      echo json_encode($respuesta);
+
     }
+
+  }
 
 }
 
 
 /*=============================================
 GENERAR CÓDIGO A PARTIR DE ID CATEGORIA
-=============================================*/ 
+=============================================*/	
 
 if(isset($_POST["idCategoria"])){
 
-  $codigoProducto = new AjaxProductos();
-  $codigoProducto -> idCategoria = $_POST["idCategoria"];
-  $codigoProducto -> ajaxCrearCodigoProducto();
+	$codigoProducto = new AjaxProductos();
+	$codigoProducto -> idCategoria = $_POST["idCategoria"];
+	$codigoProducto -> ajaxCrearCodigoProducto();
 
 }
 /*=============================================
@@ -66,3 +92,33 @@ if(isset($_POST["idProducto"])){
   $editarProducto -> ajaxEditarProducto();
 
 }
+
+/*=============================================
+TRAER PRODUCTO
+=============================================*/ 
+
+if(isset($_POST["traerProductos"])){
+
+  $traerProductos = new AjaxProductos();
+  $traerProductos -> traerProductos = $_POST["traerProductos"];
+  $traerProductos -> ajaxEditarProducto();
+
+}
+
+/*=============================================
+TRAER PRODUCTO
+=============================================*/ 
+
+if(isset($_POST["nombreProducto"])){
+
+  $traerProductos = new AjaxProductos();
+  $traerProductos -> nombreProducto = $_POST["nombreProducto"];
+  $traerProductos -> ajaxEditarProducto();
+
+}
+
+
+
+
+
+

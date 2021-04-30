@@ -15,7 +15,7 @@ class ControladorLote{
         return $respuesta;
     }
 
-    /*=============================================
+    /*===========================================
 	CREAR Lote
     =============================================*/
 
@@ -23,8 +23,7 @@ class ControladorLote{
 
         if(isset($_POST["nuevoStock"])){
     
-            if(preg_match('/^[0-9]+$/', $_POST["nuevoStock"]) &&
-			preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$_POST["newDate"])){
+            if(preg_match('/^[0-9]+$/', $_POST["nuevoStock"])){
 
                 $tabla = "lote";
 
@@ -81,6 +80,104 @@ class ControladorLote{
 
         }
     }
+
+	static public function ctrEditarLote(){
+
+        if(isset($_POST["editarStock"])){
+    
+            if(preg_match('/^[0-9]+$/', $_POST["editarStock"])){
+
+                $tabla = "lote";
+
+				$datos = array("id_lote" => $_POST["idLote"],
+							   "stock" => $_POST["editarStock"],
+							   "vencimiento" => $_POST["editDate"]);
+
+				$respuesta = ModeloLote::mdlEditarLote($tabla, $datos);
+				
+				if($respuesta == "ok"){
+
+					echo'<script>
+
+						swal({
+							  type: "success",
+							  title: "El Lote ha sido guardado correctamente",
+							  showConfirmButton: true,
+							  confirmButtonText: "Cerrar"
+							  }).then(function(result){
+										if (result.value) {
+
+										window.location = "lotes";
+
+										}
+									})
+
+						</script>';
+
+				}
+
+
+			}else{
+
+				echo'<script>
+
+					swal({
+					  type: "error",
+					  title: "¡El producto no puede ir con los campos vacíos o llevar caracteres especiales!",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar"
+					  }).then(function(result){
+						if (result.value) {
+
+						window.location = "lotes";
+
+						}
+					})
+
+			  	</script>';
+			}
+
+
+        }
+    }
+	/*=============================================
+	ELIMINAR CLIENTE
+	=============================================*/
+
+	static public function ctrEliminarLote(){
+
+		if(isset($_GET["idLote"])){
+
+			$tabla ="lote";
+			$datos = $_GET["idLote"];
+
+			$respuesta = ModeloLote::mdlEliminarLote($tabla, $datos);
+
+			if($respuesta == "ok"){
+				
+
+				echo'<script>
+
+				swal({
+					  type: "success",
+					  title: "El Lote ha sido borrado correctamente",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar"
+					  }).then(function(result){
+								if (result.value) {
+
+								window.location = "lotes";
+
+								}
+							})
+
+				</script>';
+
+			}		
+
+		}
+
+	}
 
 }
 

@@ -34,7 +34,7 @@
 
       <div class="box-body">
         
-        <table class="table table-bordered table-striped dt-responsive tablaProductos">
+        <table class="table table-bordered table-striped dt-responsive tablaProductos" style="text-align:left">
          
           <thead>
 
@@ -45,15 +45,14 @@
              <th>Código</th>
              <th>Nombre</th>
              <th>Descripción</th>
-             <th>Presentación</th>
-             <th>Categoría</th>
-             <th>Acciones</th>
-             <th>laboratorio</th>           
              <th>Stock</th>
-             <th>Tipo producto</th>
              <th>Precio de compra</th>
-             <th>Precio de venta</th>             
-             
+             <th>Precio de venta</th>
+             <th>Presentación</th>
+             <th>Categoría</th>             
+             <th>laboratorio</th>            
+             <th>Tipo producto</th>                          
+             <th>Acciones</th>
 
             </tr> 
 
@@ -477,20 +476,6 @@ MODAL EDITAR PRODUCTO
                 <span class="input-group-addon"><i class="fa fa-prescription-bottle-alt"></i></span> 
 
                 <input type="text" class="form-control input-lg" id="editarDescripcion" name="editarDescripcion" required>
-
-              </div>
-
-            </div>
-
-            <!-- ENTRADA PARA STOCK -->
-
-            <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-boxes"></i></span> 
-
-                <input type="number" class="form-control input-lg" id="editarStock" min="0" placeholder="Stock" readonly required>
 
               </div>
 

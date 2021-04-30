@@ -8,6 +8,7 @@
         	}
 
 })*/
+
 /*=============================================
 CARGAR LA TABLA DINÁMICA DE PRODUCTOS
 =============================================*/
@@ -291,6 +292,7 @@ $(".tablaProductos tbody").on("click", "button.btnEliminarProducto", function(){
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Si, borrar producto!'
         }).then(function(result){
+			
 			
         if (result.value) {
 
