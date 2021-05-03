@@ -69,9 +69,8 @@ session_start();
   <script src="vistas/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
   <script src="vistas/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
-  <!-- jQuery Number 
-  <script src="vistas/plugins/jqueryNumber/jquerynumber.min.js"></script> -->
-
+  <!--jQuery Number -->
+  <script src="vistas/plugins/jqueryNumber/jquerynumber.min.js"></script>
   
 </head>
 
@@ -115,6 +114,7 @@ CUERPO DOCUMENTO
            $_GET["ruta"] == "clientes" ||
            $_GET["ruta"] == "ventas" ||
            $_GET["ruta"] == "crear-venta" ||
+           $_GET["ruta"] == "editar-venta" ||
            $_GET["ruta"] == "reportes" ||
            $_GET["ruta"] == "salir"){
   

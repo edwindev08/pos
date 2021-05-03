@@ -13,7 +13,7 @@ class ModeloLote{
         if($item != null){
 
             $stmt = Conexion::conectar()->prepare("SELECT l.id_lote,l.stock, p.codigo, p.nombre as producto, pr.nombre as proveedor, ps.nombre as presentacion, l.vencimiento FROM $tabla l
-            left join productos p on l.lote_id_prod=p.id join proveedor pr on l.lote_id_prov=pr.id_proveedor join presentacion ps on l.l_id_present=ps.id_presentacion WHERE l.$item = :$item");
+            left join productos p on l.lote_id_prod=p.id join proveedor pr on l.lote_id_prov=pr.id_proveedor join presentacion ps on l.l_id_present=ps.id_presentacion WHERE l.$item = :$item ORDER BY l.vencimiento ASC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_INT);
 
@@ -24,7 +24,7 @@ class ModeloLote{
         }else{
 
             $stmt = Conexion::conectar()->prepare("SELECT l.id_lote,l.stock, p.codigo, p.nombre as producto, pr.nombre as proveedor, ps.nombre as presentacion, l.vencimiento FROM $tabla l
-            left join productos p on l.lote_id_prod=p.id join proveedor pr on l.lote_id_prov=pr.id_proveedor join presentacion ps on l.l_id_present=ps.id_presentacion");
+            left join productos p on l.lote_id_prod=p.id join proveedor pr on l.lote_id_prov=pr.id_proveedor join presentacion ps on l.l_id_present=ps.id_presentacion ORDER BY l.vencimiento ASC");
 
             $stmt -> execute();
 
@@ -112,6 +112,63 @@ class ModeloLote{
 		}else{
 
 			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	ACTUALIZAR Lote
+	=============================================*/
+
+	static public function mdlActualizarLote($tabla, $item1, $valor1, $valor){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE lote_id_prod = :lote_id_prod");
+
+		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+		$stmt -> bindParam(":lote_id_prod", $valor, PDO::PARAM_STR);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+	/*=============================================
+	ACTUALIZAR Lote
+	=============================================*/
+	static public function mdlMostrarStock($tabla, $item, $valor){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+			$stmt -> execute();
+
+			return $stmt -> fetch();
+
+		}else{
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+			$stmt -> execute();
+
+			return $stmt -> fetchAll();
 
 		}
 

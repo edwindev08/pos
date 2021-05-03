@@ -22,8 +22,8 @@ class ControladorLote{
     static public function ctrCrearLote(){
 
         if(isset($_POST["nuevoStock"])){
-    
-            if(preg_match('/^[0-9]+$/', $_POST["nuevoStock"])){
+
+			    if(preg_match('/^[0-9]+$/', $_POST["nuevoStock"])){
 
                 $tabla = "lote";
 
@@ -141,7 +141,7 @@ class ControladorLote{
         }
     }
 	/*=============================================
-	ELIMINAR CLIENTE
+	ELIMINAR LOTE
 	=============================================*/
 
 	static public function ctrEliminarLote(){
@@ -150,7 +150,7 @@ class ControladorLote{
 
 			$tabla ="lote";
 			$datos = $_GET["idLote"];
-
+			var_dump($datos);
 			$respuesta = ModeloLote::mdlEliminarLote($tabla, $datos);
 
 			if($respuesta == "ok"){
@@ -176,6 +176,33 @@ class ControladorLote{
 			}		
 
 		}
+
+	}
+
+	/*=============================================
+	ACTUALIZAR STOCK
+	=============================================*/
+
+	static public function mdlActualizarLote($tabla, $item1, $valor1, $valor2){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE lote_id_prod = :id");
+
+		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $valor2, PDO::PARAM_STR);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
 
 	}
 

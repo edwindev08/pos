@@ -32,15 +32,15 @@ class TablaLote{
           if($lote[$i]["stock"] <= 10){
 
             $stock = "<button class='btn btn-danger'>".$lote[$i]["stock"]."</button>";
-
+  
           }else if($lote[$i]["stock"] > 11 && $lote[$i]["stock"] <= 15){
-
+  
             $stock = "<button class='btn btn-warning'>".$lote[$i]["stock"]."</button>";
-
+  
           }else{
-
+  
             $stock = "<button class='btn btn-success'>".$lote[$i]["stock"]."</button>";
-
+  
           }
           
 

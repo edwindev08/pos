@@ -12,7 +12,7 @@ class ModeloProductos{
 		
         if($item != null){
 
-            $stmt = Conexion::conectar()->prepare("SELECT ps.id_presentacion, p.id,p.imagen,p.codigo,p.nombre as nombre,p.descripcion,ps.nombre as presentacion, p.id_categoria, c.categoria, p.precio_compra,p.precio_venta,tp.nombre as tipo, lb.nombre as laboratorio, SUM(l.stock) as stocks FROM $tabla p LEFT JOIN lote l on p.id = l.lote_id_prod JOIN categorias c on p.id_categoria = c.id JOIN tipo_producto tp on p.id_tipo_prod = tp.id_tip_prod JOIN presentacion ps on p.id_present = ps.id_presentacion join laboratorio lb on p.id_lab = lb.id_laboratorio WHERE p.$item=:$item GROUP by (p.id)");
+            $stmt = Conexion::conectar()->prepare("SELECT ps.id_presentacion, p.id,p.imagen,p.codigo,p.nombre as nombre,p.descripcion,ps.nombre as presentacion, p.id_categoria, c.categoria, p.precio_compra,p.precio_venta,tp.nombre as tipo, lb.nombre as laboratorio, p.ventas, SUM(l.stock) as stock FROM $tabla p LEFT JOIN lote l on p.id = l.lote_id_prod JOIN categorias c on p.id_categoria = c.id JOIN tipo_producto tp on p.id_tipo_prod = tp.id_tip_prod JOIN presentacion ps on p.id_present = ps.id_presentacion join laboratorio lb on p.id_lab = lb.id_laboratorio WHERE p.$item=:$item GROUP by (p.id)");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
@@ -22,7 +22,7 @@ class ModeloProductos{
 
         }else{
 
-            $stmt = Conexion::conectar()->prepare("SELECT ps.id_presentacion, p.id,p.imagen,p.codigo,p.nombre as nombre,p.descripcion,ps.nombre as presentacion, p.id_categoria, c.categoria, p.precio_compra,p.precio_venta,tp.nombre as tipo, lb.nombre as laboratorio, SUM(l.stock) as stocks FROM $tabla p LEFT JOIN lote l on p.id = l.lote_id_prod JOIN categorias c on p.id_categoria = c.id JOIN tipo_producto tp on p.id_tipo_prod = tp.id_tip_prod JOIN presentacion ps on p.id_present = ps.id_presentacion join laboratorio lb on p.id_lab = lb.id_laboratorio GROUP by (p.id)");
+            $stmt = Conexion::conectar()->prepare("SELECT ps.id_presentacion, p.id,p.imagen,p.codigo,p.nombre as nombre,p.descripcion,ps.nombre as presentacion, p.id_categoria, c.categoria, p.precio_compra,p.precio_venta,tp.nombre as tipo, lb.nombre as laboratorio,p.ventas, SUM(l.stock) as stock FROM $tabla p LEFT JOIN lote l on p.id = l.lote_id_prod JOIN categorias c on p.id_categoria = c.id JOIN tipo_producto tp on p.id_tipo_prod = tp.id_tip_prod JOIN presentacion ps on p.id_present = ps.id_presentacion join laboratorio lb on p.id_lab = lb.id_laboratorio GROUP by (p.id)");
 
 			$stmt -> execute();
 
@@ -110,6 +110,33 @@ class ModeloProductos{
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 
 		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	ACTUALIZAR PRODUCTO
+	=============================================*/
+
+	static public function mdlActualizarProducto($tabla, $item1, $valor1, $valor){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id = :id");
+
+		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
 
 		if($stmt -> execute()){
 

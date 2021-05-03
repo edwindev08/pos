@@ -26,7 +26,7 @@
       </div>
         <div class="box-body">
         
-          <table class="table table-bordered table-striped dt-responsive tablas">
+          <table class="table table-bordered table-striped tablaLotes">
          
             <thead>
 
@@ -45,8 +45,9 @@
 
             </thead>
 
-            <tbody>
+            <!--  <tbody>
             <?php
+            /*
 
               $item = null;
               $valor = null;
@@ -88,10 +89,11 @@
                   </tr>';
               
               }
-
+                */
               ?>
+              
 
-            </tbody>
+            </tbody> -->
 
           
           </table>

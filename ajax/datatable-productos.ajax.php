@@ -36,18 +36,18 @@ class TablaProductos{
           /*=============================================
  	        Declaro stock para calcular limites
   	      =============================================*/ 
-          if($productos[$i]["stocks"] <= 10){
+          if($productos[$i]["stock"] <= 10){
 
-            $stock = "<label class='badge bg-red'>".$productos[$i]["stocks"]."</label>";
-
-          }else if($productos[$i]["stocks"] > 11 && $productos[$i]["stocks"] <= 15){
-
-            $stock = "<label class='badge bg-yellow'>".$productos[$i]["stocks"]."</label>";
-
+            $stock = "<button class='btn btn-danger'>".$productos[$i]["stock"]."</button>";
+  
+          }else if($productos[$i]["stock"] > 11 && $productos[$i]["stock"] <= 15){
+  
+            $stock = "<button class='btn btn-warning'>".$productos[$i]["stock"]."</button>";
+  
           }else{
-
-            $stock = "<label class='badge bg-green'>".$productos[$i]["stocks"]."</label>";
-
+  
+            $stock = "<button class='btn btn-success'>".$productos[$i]["stock"]."</button>";
+  
           }
           
 
@@ -64,6 +64,7 @@ class TablaProductos{
                 "'.$stock.'",
                 "'.$precio_compra.'",
                 "'.$precio_venta.'",
+                "'.$productos[$i]["ventas"].'",
                 "'.$productos[$i]["presentacion"].'",
                 "'.$productos[$i]["categoria"].'",                
                 "'.$productos[$i]["laboratorio"].'",                

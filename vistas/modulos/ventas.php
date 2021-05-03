@@ -93,7 +93,7 @@
             
                     <td>'.$value["metodo_pago"].'</td>
             
-                    <td>$'.number_format($value["subtotal"],0).'</td>
+                    <td>$'.number_format($value["neto"],0).'</td>
             
                     <td>$'.number_format($value["total"],0).'</td>
             

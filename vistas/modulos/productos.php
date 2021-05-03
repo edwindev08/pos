@@ -48,6 +48,7 @@
              <th>Stock</th>
              <th>Precio de compra</th>
              <th>Precio de venta</th>
+             <th>N° Ventas</th>
              <th>Presentación</th>
              <th>Categoría</th>             
              <th>laboratorio</th>            
