@@ -250,7 +250,7 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
 		   
            $("#editarDescripcion").val(respuesta["descripcion"]);
 
-           $("#editarStock").val(respuesta["stock"]);
+          // $("#editarStock").val(respuesta["stock"]);
 		   
            $("#editarPrecioCompra").val(respuesta["precio_compra"]);
 
@@ -270,6 +270,7 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
   })
 
 })
+
 
 /*=============================================
 ELIMINAR PRODUCTO

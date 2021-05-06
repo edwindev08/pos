@@ -11,8 +11,19 @@ class ControladorProductos{
         $tabla = "productos";
 
         $respuesta = ModeloProductos::mdlMostrarProductos($tabla, $item, $valor);
-
+		
         return $respuesta;
+    }
+
+	static public function ctrSumarStocks($item, $valor){
+
+        $tabla = "lote";
+
+        $respuesta = ModeloProductos::mdlSumarStocks($tabla, $item, $valor);
+
+		
+        return $respuesta;
+		
     }
 
 

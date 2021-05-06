@@ -20,7 +20,7 @@ class AjaxLotes{
 
 		echo json_encode($respuesta);
 
-
+		
 	}
 
 }

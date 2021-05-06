@@ -45,9 +45,9 @@
 
             </thead>
 
-            <!--  <tbody>
+            <tbody>
             <?php
-            /*
+            
 
               $item = null;
               $valor = null;
@@ -61,7 +61,7 @@
                   <tr>
               
                     <td>'.($key+1).'</td>
-              
+                    
                     <td>'.$value["codigo"].'</td>
               
                     <td>'.$value["producto"].'</td>
@@ -73,12 +73,12 @@
                     <td>'.$value["presentacion"].'</td>
               
                     <td>'.$value["vencimiento"].'</td>
-              
+                
                     <td>
-              
+                    <option type ="hidden" idLote ="'.$value["id_lote"].'"></option>
                       <div class="btn-group">
               
-                        <button class="btn btn-warning btnEditarLote"       data-toggle="modal" data-target="#modalEditarLote"     idLote="'.$value["id_lote"].'"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-warning btnEditarLote"       data-toggle="modal" data-target="#modalEditarLote" idLote="'.$value["id_lote"].'"><i class="fas fa-edit"></i></button>
               
                         <button class="btn btn-danger btnEliminarLote" idLote="'.$value["id_lote"].'"><i class="fas fa-trash-alt"></i></button>
               
@@ -89,11 +89,11 @@
                   </tr>';
               
               }
-                */
+                
               ?>
               
 
-            </tbody> -->
+            </tbody> 
 
           
           </table>
@@ -348,10 +348,10 @@ MODAL EDITAR LOTE
                 <span class="input-group-addon"><i class="fa fa-pills"></i></span> 
 
                 <input type="number" class="form-control input-lg" id="editarStock" name="editarStock" placeholder="Ingresar Stock" required>
+                
                 <input type="hidden" id="idLote" name="idLote">
-
               </div>
-
+              
           </div>
             
             <!-- ENTRADA PARA VENCIMIENTO -->
@@ -394,8 +394,6 @@ MODAL EDITAR LOTE
         $editarLote -> ctrEditarLote();
 
       ?>
-
-    
 
     </div>
 

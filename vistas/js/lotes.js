@@ -42,12 +42,14 @@ $('.tablaLotes').DataTable( {
 EDITAR LOTE
 =============================================*/
 
-$(".tablas").on("click", ".btnEditarLote", function(){
+$(".tablaLotes").on("click", ".btnEditarLote", function(){
 
 	var idLote = $(this).attr("idLote");
+  
 
 	var datos = new FormData();
     datos.append("idLote", idLote);
+    console.log('datos', datos)
 
     $.ajax({
 
@@ -66,6 +68,7 @@ $(".tablas").on("click", ".btnEditarLote", function(){
 	       /*$("#editarProveedor").val(respuesta["lote_id_prov"]);
 	       $("#editarPresentacion").val(respuesta["l_id_present"]);*/
 	       $("#editDate").val(respuesta["vencimiento"]);
+         
 	  }
 
   	})
@@ -75,7 +78,7 @@ $(".tablas").on("click", ".btnEditarLote", function(){
 /*=============================================
 ELIMINAR LOTE
 =============================================*/
-$(".tablas").on("click", ".btnEliminarLote", function(){
+$(".tablaLotes").on("click", ".btnEliminarLote", function(){
 
 	var idLote = $(this).attr("idLote");
 	

@@ -31,37 +31,100 @@ class ControladorVentas{
 			$listaProductos = json_decode($_POST["listaProductos"], true);
 
 			$totalProductosComprados = array();
+			try {
             
             foreach ($listaProductos as $key => $value){
 
 				array_push($totalProductosComprados, $value["cantidad"]);
 
 				$tablaProductos = "productos";
-				$tablaLote = "lote";
-
-				$ite = "lote_id_prod";
+				
 			    $item = "id";
 			    $valor = $value["id"];
-				//$val = $value["id_lote"];
-
+				$prID = $value["id"];
 				$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
 				
-				$traerLotes = ModeloLote::mdlMostrarStock($tablaLote, $ite, $valor);
+				
 
+				//$loteVencer = ModeloLote::mdlLoteVencer($tablaLote, $ite, $valor);
 				
 				$item1a = "ventas";
 				$valor1a = $value["cantidad"] + $traerProducto["ventas"];
 
 				$nuevasVentas = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1a, $valor1a, $valor);
 
-				$item1b = "stock";
-				$valor1b = $value["stock"];
+				
+					$cantidad = $value["cantidad"];
+					$canti = $value["cantidad"];
+					while ($cantidad != 0) {
+						$tablaLote = "lote";
+						$ite = "lote_id_prod";
+						//$val = $_POST["listaProductos"];
+						$contarLotes = ModeloLote::mdlContarLotes($tablaLote, $ite, $prID);
+						$traerLotes = ModeloLote::mdlMostrarStock($tablaLote, $ite, $prID);
+						$item1b = "stocks";
+						$ite2 = "id_lote";
+						$val = $traerLotes["id_lote"];
+						$l = $contarLotes["lotes"];
+						$item1b = "stocks";
+								$ite2 = "id_lote";
+								$val = $traerLotes["id_lote"];
+								
+						
+						//var_dump($cantidad);
+						//var_dump($traerLotes["stocks"]);
+						foreach($traerLotes as $lotes) {
+						
+							if ($cantidad < (int)$traerLotes['stocks']) {
+								$traerLotes = ModeloLote::mdlMostrarStock($tablaLote, $ite, $prID);
+								$val = $traerLotes["id_lote"];
+								$valor1b = (int)$traerLotes['stocks']-$cantidad;
+								$nuevoStock = ModeloLote::mdlActualizarStock($tablaLote, $item1b,$valor1b, $ite2, $val);
+								//var_dump($lotes["stocks"]);
+								$cantidad=0;
+								
+	
+							}
+							
+	
+							if ($cantidad == (int)$traerLotes["stocks"]) {
+	
+								$traerLotes = ModeloLote::mdlMostrarStock($tablaLote, $ite, $prID);
+								$val = $traerLotes["id_lote"];
+								$delStock = ModeloLote::mdlEliminarStock($tablaLote, $ite2, $val);
 
-				$nuevoStock = ModeloLote::mdlActualizarLote($tablaLote, $item1b, $valor1b, $valor);
+								$cantidad=0;
+							}
+	
+							if ($cantidad > $traerLotes["stocks"]) {
+	
+	
+								$delStock = ModeloLote::mdlEliminarStock($tablaLote, $ite2, $val);
+								$cantidad = $cantidad - $traerLotes["stocks"];
+								
+								
+							}
+	
+						}
+						
+						
+					}
 
+				}
+	
+				
+			} catch (Exception $error) {
 
+				echo $error->getMessage();
 			}
+				
+		
+		
 
+			
+
+			
+				
 			$tablaClientes = "clientes";
 
 			$item = "id";
@@ -83,8 +146,7 @@ class ControladorVentas{
 			$hora = date('H:i:s');
 			$valor1b = $fecha.' '.$hora;
 
-			$fechaCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1b, $valor1b, $valor);
-
+			$fechaCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1b, $valor1b, $valor);			
 			
 			/*=============================================
 			GUARDAR LA COMPRA
@@ -177,11 +239,15 @@ class ControladorVentas{
 					array_push($totalProductosComprados, $value["cantidad"]);
 					
 					$tablaProductos = "productos";
+					$tablaLote = "lote";
 
+					$ite = "lote_id_prod";
 					$item = "id";
 					$valor = $value["id"];
 
 					$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
+
+					$traerLotes = ModeloLote::mdlMostrarStock($tablaLote, $ite, $valor);
 
 					$item1a = "ventas";
 					$valor1a = $traerProducto["ventas"] - $value["cantidad"];
@@ -189,9 +255,9 @@ class ControladorVentas{
 					$nuevasVentas = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1a, $valor1a, $valor);
 
 					$item1b = "stock";
-					$valor1b = $value["cantidad"] + $traerProducto["stock"];
+					$valor1b = $value["cantidad"] + $traerLotes["stock"];
 
-					$nuevoStock = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1b, $valor1b, $valor);
+					$nuevoStock = ModeloLote::mdlActualizarLote($tablaLote, $item1b, $valor1b, $valor);
 
 				}
 
@@ -220,11 +286,16 @@ class ControladorVentas{
 					array_push($totalProductosComprados_2, $value["cantidad"]);
 					
 					$tablaProductos_2 = "productos";
+					$tablaLote_2 = "lote";
+
+					$ite_2 = "lote_id_prod";
 
 					$item_2 = "id";
 					$valor_2 = $value["id"];
 
 					$traerProducto_2 = ModeloProductos::mdlMostrarProductos($tablaProductos_2, $item_2, $valor_2);
+
+					$traerLotes_2 = ModeloLote::mdlMostrarStock($tablaLote_2, $ite_2, $valor_2);
 
 					$item1a_2 = "ventas";
 					$valor1a_2 = $value["cantidad"] + $traerProducto_2["ventas"];
@@ -232,9 +303,9 @@ class ControladorVentas{
 					$nuevasVentas_2 = ModeloProductos::mdlActualizarProducto($tablaProductos_2, $item1a_2, $valor1a_2, $valor_2);
 
 					$item1b_2 = "stock";
-					$valor1b_2 = $traerProducto_2["stock"] - $value["cantidad"];
+					$valor1b_2 = $traerLotes_2["stock"] - $value["cantidad"];
 
-					$nuevoStock_2 = ModeloProductos::mdlActualizarProducto($tablaProductos_2, $item1b_2, $valor1b_2, $valor_2);
+					$nuevoStock_2 = ModeloLote::mdlActualizarLote($tablaLote_2, $item1b_2, $valor1b_2, $valor_2);
 
 				}
 
@@ -250,7 +321,7 @@ class ControladorVentas{
 
 				$comprasCliente_2 = ModeloClientes::mdlActualizarCliente($tablaClientes_2, $item1a_2, $valor1a_2, $valor_2);
 
-				$item1b_2 = "ultima_compra";
+				$item1b_2 = "ul_compra";
 
 				date_default_timezone_set('America/Bogota');
 
@@ -301,6 +372,149 @@ class ControladorVentas{
 
 			}
 
+		}
+
+	}
+
+	/*=============================================
+	ELIMINAR VENTA
+	=============================================*/
+
+	static public function ctrEliminarVenta(){
+
+		if(isset($_GET["idVenta"])){
+
+			$tabla = "ventas";
+
+			$item = "id";
+			$valor = $_GET["idVenta"];
+
+			$traerVenta = ModeloVentas::mdlMostrarVentas($tabla, $item, $valor);
+
+			/*=============================================
+			ACTUALIZAR FECHA ÚLTIMA COMPRA
+			=============================================*/
+
+			$tablaClientes = "clientes";
+
+			$itemVentas = null;
+			$valorVentas = null;
+
+			$traerVentas = ModeloVentas::mdlMostrarVentas($tabla, $itemVentas, $valorVentas);
+
+			$guardarFechas = array();
+
+			foreach ($traerVentas as $key => $value) {
+				
+				if($value["id_cliente"] == $traerVenta["id_cliente"]){
+
+					array_push($guardarFechas, $value["fecha"]);
+
+				}
+
+			}
+
+			if(count($guardarFechas) > 1){
+
+				if($traerVenta["fecha"] > $guardarFechas[count($guardarFechas)-2]){
+
+					$item = "ul_compra";
+					$valor = $guardarFechas[count($guardarFechas)-2];
+					$valorIdCliente = $traerVenta["id_cliente"];
+
+					$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item, $valor, $valorIdCliente);
+
+				}else{
+
+					$item = "ul_compra";
+					$valor = $guardarFechas[count($guardarFechas)-1];
+					$valorIdCliente = $traerVenta["id_cliente"];
+
+					$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item, $valor, $valorIdCliente);
+
+				}
+
+
+			}else{
+
+				$item = "ul_compra";
+				$valor = "0000-00-00 00:00:00";
+				$valorIdCliente = $traerVenta["id_cliente"];
+
+				$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item, $valor, $valorIdCliente);
+
+			}
+
+			/*=============================================
+			FORMATEAR TABLA DE PRODUCTOS Y LA DE CLIENTES
+			=============================================*/
+
+			$productos =  json_decode($traerVenta["productos"], true);
+
+			$totalProductosComprados = array();
+
+			foreach ($productos as $key => $value) {
+
+				array_push($totalProductosComprados, $value["cantidad"]);
+				
+				$tablaProductos = "productos";
+
+				$item = "id";
+				$valor = $value["id"];
+
+				$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
+
+				$item1a = "ventas";
+				$valor1a = $traerProducto["ventas"] - $value["cantidad"];
+
+				$nuevasVentas = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1a, $valor1a, $valor);
+
+				$item1b = "stock";
+				$valor1b = $value["cantidad"] + $traerProducto["stock"];
+
+				$nuevoStock = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1b, $valor1b, $valor);
+
+			}
+
+			$tablaClientes = "clientes";
+
+			$itemCliente = "id";
+			$valorCliente = $traerVenta["id_cliente"];
+
+			$traerCliente = ModeloClientes::mdlMostrarClientes($tablaClientes, $itemCliente, $valorCliente);
+
+			$item1a = "compras";
+			$valor1a = $traerCliente["compras"] - array_sum($totalProductosComprados);
+
+			$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valorCliente);
+
+			/*=============================================
+			ELIMINAR VENTA
+			=============================================*/
+
+			$respuesta = ModeloVentas::mdlEliminarVenta($tabla, $_GET["idVenta"]);
+
+			if($respuesta == "ok"){
+
+				echo'<script>
+
+				swal({
+					  type: "success",
+					  title: "La venta ha sido borrada correctamente",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar",
+					  closeOnConfirm: false
+					  }).then((result) => {
+								if (result.value) {
+
+								window.location = "ventas";
+
+								}
+							})
+
+				</script>';
+
+			}		
 		}
 
 	}

@@ -11,8 +11,9 @@ class ControladorLote{
         $tabla = "lote";
 
         $respuesta = ModeloLote::mdlMostrarLote($tabla, $item, $valor);
-
+		
         return $respuesta;
+		
     }
 
     /*===========================================
@@ -94,7 +95,8 @@ class ControladorLote{
 							   "vencimiento" => $_POST["editDate"]);
 
 				$respuesta = ModeloLote::mdlEditarLote($tabla, $datos);
-				
+				var_dump($_POST["editarStock"]);
+
 				if($respuesta == "ok"){
 
 					echo'<script>

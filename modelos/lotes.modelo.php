@@ -12,8 +12,7 @@ class ModeloLote{
 
         if($item != null){
 
-            $stmt = Conexion::conectar()->prepare("SELECT l.id_lote,l.stock, p.codigo, p.nombre as producto, pr.nombre as proveedor, ps.nombre as presentacion, l.vencimiento FROM $tabla l
-            left join productos p on l.lote_id_prod=p.id join proveedor pr on l.lote_id_prov=pr.id_proveedor join presentacion ps on l.l_id_present=ps.id_presentacion WHERE l.$item = :$item ORDER BY l.vencimiento ASC");
+            $stmt = Conexion::conectar()->prepare("SELECT * WHERE $item = :$item");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_INT);
 
@@ -123,14 +122,14 @@ class ModeloLote{
 
 	/*=============================================
 	ACTUALIZAR Lote
-	=============================================*/
+	=============================================
 
 	static public function mdlActualizarLote($tabla, $item1, $valor1, $valor){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE lote_id_prod = :lote_id_prod");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id_lote = :id_lote and lote_id_prod = :lote_id_prod");
 
 		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-		$stmt -> bindParam(":lote_id_prod", $valor, PDO::PARAM_STR);
+		$stmt -> bindParam(":id_lote",":lote_id_prod", $valor, PDO::PARAM_STR);
 
 		if($stmt -> execute()){
 
@@ -146,15 +145,46 @@ class ModeloLote{
 
 		$stmt = null;
 
-	}
+	}*/
 	/*=============================================
-	ACTUALIZAR Lote
+	Mostrar STOCK
 	=============================================*/
 	static public function mdlMostrarStock($tabla, $item, $valor){
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+			$stmt = Conexion::conectar()->prepare("SELECT stock as stocks, id_lote, lote_id_prod, vencimiento FROM $tabla WHERE lote_id_prod = :$item AND vencimiento = (SELECT MIN(vencimiento) FROM lote  WHERE lote_id_prod = :$item)");
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+			$stmt -> execute();
+
+			return $stmt -> fetch();
+
+		}else{
+
+			$stmt = Conexion::conectar()->prepare("SELECT stock as stocks,id_lote, lote_id_prod, vencimiento  FROM $tabla");
+
+			$stmt -> execute();
+
+			return $stmt -> fetchAll();
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	CONTAR STOCK
+	=============================================*/
+	static public function mdlContarLotes($tabla, $item, $valor){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT COUNT(lote_id_prod) as lotes FROM $tabla WHERE $item = :$item ");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
@@ -175,6 +205,58 @@ class ModeloLote{
 		$stmt -> close();
 
 		$stmt = null;
+
+	}
+
+	/*=============================================
+	ACTUALIZAR STOCK
+	=============================================*/
+
+	static public function mdlActualizarStock($tabla, $item1, $valor1, $item2, $valor2){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla l INNER JOIN productos p on l.lote_id_prod = p.id SET stock = :$item1 WHERE $item2 = :$item2");
+
+		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_INT);
+		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+
+	}
+
+	static public function mdlEliminarStock($tabla, $item1, $valor1){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_lote = :$item1");
+
+		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_INT);
+		
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
 
 	}
 
