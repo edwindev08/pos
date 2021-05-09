@@ -61,6 +61,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 	var datos = new FormData();
     datos.append("idProducto", idProducto);
+	console.log('idProducto', idProducto)
 
      $.ajax({
 
@@ -738,6 +739,7 @@ BORRAR VENTA
 $(".tablas").on("click", ".btnEliminarVenta", function(){
 
   var idVenta = $(this).attr("idVenta");
+  console.log('idVenta', idVenta)
 
   swal({
         title: '¿Está seguro de borrar la venta?',
@@ -755,5 +757,17 @@ $(".tablas").on("click", ".btnEliminarVenta", function(){
         }
 
   })
+
+})
+
+/*=============================================
+IMPRIMIR FACTURA
+=============================================*/
+
+$(".tablas").on("click", ".btnImprimirFactura", function(){
+
+	var codigoVenta = $(this).attr("codigoVenta");
+
+	window.open("extensiones/TCPDF-main/pdf/invoice.php?codigo="+codigoVenta, "_blank");
 
 })

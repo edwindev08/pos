@@ -289,7 +289,7 @@
 
           <div class="box-body">
             
-            <table class="table table-bordered table-striped tablaVentas">
+            <table class="table table-bordered table-striped dt-responsive tablaVentas">
               
                <thead>
 

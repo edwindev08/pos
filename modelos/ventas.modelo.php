@@ -76,7 +76,7 @@ class ModeloVentas{
 	static public function mdlEditarVenta($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET  id_cliente = :id_cliente, id_vendedor = :id_vendedor, impuesto = :impuesto, productos = :productos, neto = :neto, total= :total, metodo_pago = :metodo_pago WHERE codigo = :codigo");
-
+		
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_vendedor", $datos["id_vendedor"], PDO::PARAM_INT);	

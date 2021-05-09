@@ -13,6 +13,7 @@ class ControladorLote{
         $respuesta = ModeloLote::mdlMostrarLote($tabla, $item, $valor);
 		
         return $respuesta;
+		var_dump($tabla);
 		
     }
 

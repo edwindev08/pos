@@ -26,7 +26,7 @@
       </div>
         <div class="box-body">
         
-          <table class="table table-bordered table-striped tablaLotes">
+          <table class="table table-bordered table-striped dt-responsive tablas">
          
             <thead>
 

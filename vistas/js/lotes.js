@@ -4,7 +4,7 @@
 CARGAR LA TABLA DINÁMICA DE LOTES
 =============================================*/
 
-$('.tablaLotes').DataTable( {
+/*$('.tablas').DataTable( {
   "ajax": "ajax/dtable-lotes.ajax.php",
 "deferRender": true,
 "retrieve": true,
@@ -36,20 +36,20 @@ $('.tablaLotes').DataTable( {
 
 }
 
-} );
+} );*/
 
 /*=============================================
 EDITAR LOTE
 =============================================*/
 
-$(".tablaLotes").on("click", ".btnEditarLote", function(){
+$(".tablas").on("click", ".btnEditarLote", function(){
 
 	var idLote = $(this).attr("idLote");
   
 
 	var datos = new FormData();
     datos.append("idLote", idLote);
-    console.log('datos', datos)
+    console.log('idLote', idLote)
 
     $.ajax({
 
@@ -68,6 +68,7 @@ $(".tablaLotes").on("click", ".btnEditarLote", function(){
 	       /*$("#editarProveedor").val(respuesta["lote_id_prov"]);
 	       $("#editarPresentacion").val(respuesta["l_id_present"]);*/
 	       $("#editDate").val(respuesta["vencimiento"]);
+         console.log('respuesta', respuesta["stock"])
          
 	  }
 
@@ -78,7 +79,7 @@ $(".tablaLotes").on("click", ".btnEditarLote", function(){
 /*=============================================
 ELIMINAR LOTE
 =============================================*/
-$(".tablaLotes").on("click", ".btnEliminarLote", function(){
+$(".tablas").on("click", ".btnEliminarLote", function(){
 
 	var idLote = $(this).attr("idLote");
 	
