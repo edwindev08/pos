@@ -29,7 +29,15 @@ class TablaProductos{
           
           $imagen = "<img src='".$productos[$i]["imagen"]."' width='40px'>";
 
-          $btns = "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fas fa-edit'></i></button><button class='btn btn-danger btnEliminarProducto' idProducto='".$productos[$i]["id"]."' codigo='".$productos[$i]["codigo"]."' imagen='".$productos[$i]["imagen"]."'><i class='fas fa-trash-alt'></i></button></div>";
+          if(isset($_GET["perfilOculto"]) && $_GET["perfilOculto"] == "Especial"){
+
+            $btns =  "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fas fa-edit'></i></button></div>"; 
+  
+          }else{
+  
+            $btns =  "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fas fa-edit'></i></button><button class='btn btn-danger btnEliminarProducto' idProducto='".$productos[$i]["id"]."' codigo='".$productos[$i]["codigo"]."' imagen='".$productos[$i]["imagen"]."'><i class='fa fa-times'></i></button></div>"; 
+  
+          }
 
           $precio_venta = "<td>$".number_format($productos[$i]["precio_venta"],2)."</td>";
           $precio_compra = "<td>$".number_format($productos[$i]["precio_compra"],2)."</td>";

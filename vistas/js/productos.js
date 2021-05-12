@@ -8,13 +8,13 @@
         	}
 
 })*/
-
+var perfilOculto = $("#perfilOculto").val();
 /*=============================================
 CARGAR LA TABLA DINÁMICA DE PRODUCTOS
 =============================================*/
 
 $('.tablaProductos').DataTable( {
-        "ajax": "ajax/datatable-productos.ajax.php",
+        "ajax": "ajax/datatable-productos.ajax.php?perfilOculto="+perfilOculto,
 		"deferRender": true,
 		"retrieve": true,
 		"processing": true,

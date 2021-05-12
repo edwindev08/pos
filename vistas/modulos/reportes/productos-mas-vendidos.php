@@ -45,9 +45,9 @@ PRODUCTOS MÁS VENDIDOS
 
 		  	 	<?php
 
-					for($i = 0; $i < 10; $i++){
+					for($i = 0; $i < 6; $i++){
 
-					echo ' <li><i class="fa fa-circle-o text-'.$colores[$i].'"></i> '.$productos[$i]["nombre"].'</li>';
+					echo ' <li style="margin: -1.9px;"><i class="far fa-circle text-'.$colores[$i].'"></i> '.$productos[$i]["nombre"].'</li><br style="margin: -1px;" >';
 
 					}
 
@@ -69,7 +69,7 @@ PRODUCTOS MÁS VENDIDOS
 			
 			 <?php
 
-          	for($i = 0; $i <5; $i++){
+          	for($i = 0; $i <6; $i++){
 			
           		echo '<li>
 						 
@@ -110,7 +110,7 @@ PRODUCTOS MÁS VENDIDOS
 
   <?php
 
-  for($i = 0; $i < 10; $i++){
+  for($i = 0; $i < 6; $i++){
 
   	echo "{
       value    : ".$productos[$i]["ventas"].",
