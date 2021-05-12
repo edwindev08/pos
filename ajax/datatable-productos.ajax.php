@@ -16,8 +16,8 @@ class TablaProductos{
 
       $item = null;
     	$valor = null;
-
-  		$productos = ControladorProductos::ctrMostrarProductos($item, $valor);
+      $orden = "id";
+  		$productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
       
       $datosJson = '{
         "data": [';

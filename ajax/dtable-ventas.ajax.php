@@ -14,8 +14,8 @@ class TablaProductosVentas{
 
 		$item = null;
     	$valor = null;
-
-  		$productos = ControladorProductos::ctrMostrarProductos($item, $valor);	
+		$orden = "id";
+  		$productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);	
 		
   		if(count($productos) == 0){
 

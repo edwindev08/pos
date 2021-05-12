@@ -38,6 +38,11 @@ session_start();
   <link rel="stylesheet" href="vistas/plugins/iCheck/all.css">
   <!-- bootstrap datepicker -->
   <link rel="stylesheet" href="vistas/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="vistas/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="vistas/bower_components/morris.js/morris.css">
+
 <!--=====================================
   PLUGINS DE JAVASCRIPT
   ======================================-->
@@ -71,7 +76,16 @@ session_start();
 
   <!--jQuery Number -->
   <script src="vistas/plugins/jqueryNumber/jquerynumber.min.js"></script>
-  
+  <!-- daterangepicker http://www.daterangepicker.com/-->
+  <script src="vistas/bower_components/moment/min/moment.min.js"></script>
+  <script src="vistas/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+   <!-- Morris.js charts http://morrisjs.github.io/morris.js/-->
+   <script src="vistas/bower_components/raphael/raphael.min.js"></script>
+  <script src="vistas/bower_components/morris.js/morris.min.js"></script>
+
+  <!-- ChartJS http://www.chartjs.org/-->
+  <script src="vistas/bower_components/chart.js/Chart.js"></script>
 </head>
 
 <!--=====================================
@@ -156,5 +170,6 @@ CUERPO DOCUMENTO
  <script src="vistas/js/clientes.js"></script>
  <script src="vistas/js/proveedores.js"></script>
  <script src="vistas/js/ventas.js"></script>
+ <script src="vistas/js/reportes.js"></script>
 </body>
 </html>
