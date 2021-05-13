@@ -1,5 +1,10 @@
 <?php
 
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\EscposImage;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+
 class ControladorVentas{
 
 	/*=============================================
@@ -147,6 +152,89 @@ class ControladorVentas{
 		$respuesta = ModeloVentas::mdlIngresarVenta($tablav, $datosv);
 
 		if($respuesta == "ok"){
+
+			// $impresora = "epson20";
+
+			// $conector = new WindowsPrintConnector($impresora);
+
+			// $imprimir = new Printer($conector);
+
+			// $imprimir -> text("Hola Mundo"."\n");
+
+			// $imprimir -> cut();
+
+			// $imprimir -> close();
+
+			$impresora = "epsonl3";
+
+			$conector = new WindowsPrintConnector($impresora);
+
+			$printer = new Printer($conector);
+
+			$printer -> setJustification(Printer::JUSTIFY_CENTER);
+
+			$printer -> text(date("Y-m-d H:i:s")."\n");//Fecha de la factura
+
+			$printer -> feed(1); //Alimentamos el papel 1 vez*/
+
+			$printer -> text("Ser Vital Droguería"."\n");//Nombre de la empresa
+
+			$printer -> text("NIT: 90.141.6287-1"."\n");//Nit de la empresa
+
+			$printer -> text("Dirección: Carrera 45A # 48A - 120"."\n");//Dirección de la empresa
+
+			$printer -> text("Teléfono: 318 827 5905"."\n");//Teléfono de la empresa
+
+			$printer -> text("FACTURA N.".$_POST["nuevaVenta"]."\n");//Número de factura
+
+			$printer -> feed(1); //Alimentamos el papel 1 vez*/
+
+			$printer -> text("Cliente: ".$traerCliente["nombre"]."\n");//Nombre del cliente
+
+			$tablaVendedor = "usuarios";
+			$item = "id";
+			$valor = $_POST["idVendedor"];
+
+			$traerVendedor = ModeloUsuarios::mdlMostrarUsuarios($tablaVendedor, $item, $valor);
+
+			$printer -> text("Vendedor: ".$traerVendedor["nombre"]."\n");//Nombre del vendedor
+
+			$printer -> feed(1); //Alimentamos el papel 1 vez*/
+
+			foreach ($listaProductos as $key => $value) {
+
+				$printer->setJustification(Printer::JUSTIFY_LEFT);
+
+				$printer->text($value["nombre"]."\n");//Nombre del producto
+
+				$printer->setJustification(Printer::JUSTIFY_RIGHT);
+
+				$printer->text("$ ".number_format($value["precio"])." Und x ".$value["cantidad"]." = $ ".number_format($value["total"])."\n");
+
+			}
+
+			$printer -> feed(1); //Alimentamos el papel 1 vez*/			
+				
+			$printer->text("NETO: $ ".number_format($_POST["nuevoPrecioNeto"])."\n"); //ahora va el neto
+
+			$printer->text("IMPUESTO: $ ".number_format($_POST["nuevoPrecioImpuesto"])."\n"); //ahora va el impuesto
+
+			$printer->text("--------\n");
+
+			$printer->text("TOTAL: $ ".number_format($_POST["totalVenta"])."\n"); //ahora va el total
+
+			$printer -> feed(1); //Alimentamos el papel 1 vez*/	
+
+			$printer->text("Muchas gracias por su compra"); //Podemos poner también un pie de página
+
+			$printer -> feed(3); //Alimentamos el papel 3 veces*/
+
+			$printer -> cut(); //Cortamos el papel, si la impresora tiene la opción
+
+			$printer -> pulse(); //Por medio de la impresora mandamos un pulso, es útil cuando hay cajón moneder
+
+			$printer -> close();
+
 			
 			echo'<script>
 			localStorage.removeItem("rango");

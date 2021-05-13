@@ -22,6 +22,7 @@ require_once "modelos/lotes.modelo.php";
 require_once "modelos/productos.modelo.php";
 require_once "modelos/clientes.modelo.php";
 require_once "modelos/ventas.modelo.php";
+require_once "extensiones/vendor/autoload.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla -> ctrPlantilla();
