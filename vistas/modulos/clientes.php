@@ -1,18 +1,18 @@
-<?php
+<!-- <?php
 
-if($_SESSION["perfil"] == "Especial"){
+// if($_SESSION["perfil"] == "Especial"){
 
-  echo '<script>
+//   echo '<script>
 
-    window.location = "inicio";
+//     window.location = "inicio";
 
-  </script>';
+//   </script>';
 
-  return;
+//   return;
 
-}
+// }
 
-?>
+?> -->
 <div class="content-wrapper">
 
   <section class="content-header">
